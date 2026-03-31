@@ -1,26 +1,164 @@
+/* Fonts loaded via <link> in layout.tsx — do NOT add @import url() here,
+   it would appear after Tailwind's expanded rules and break the CSS parser. */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Tailwind v4 Theme ─────────────────────────────────────────── */
+@theme {
+  /* Backgrounds */
+  --color-smaw-bg:      #030712;
+  --color-smaw-surface: #0a1020;
+  --color-smaw-card:    #0d1525;
+  --color-smaw-elevated:#111d32;
+
+  /* Brand */
+  --color-smaw-blue:    #2563eb;
+  --color-smaw-blue-lt: #60a5fa;
+  --color-smaw-blue-dim:rgba(37,99,235,0.12);
+
+  /* Text */
+  --color-smaw-tx1: #e2e8f8;
+  --color-smaw-tx2: #7a93bc;
+  --color-smaw-tx3: #3d5270;
+
+  /* Status */
+  --color-smaw-green:  #10b981;
+  --color-smaw-yellow: #f59e0b;
+
+  /* Borders */
+  --color-smaw-bdr:    rgba(148,163,184,0.08);
+  --color-smaw-bdr-md: rgba(148,163,184,0.14);
+
+  /* Fonts */
+  --font-cairo: 'Cairo', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+
+  /* Animations */
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-pulse-slow: pulse 3s ease-in-out infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base ──────────────────────────────────────────────────────── */
+/* NOTE: box-sizing, margin:0, padding:0 are handled by Tailwind Preflight.
+   Do NOT add them here — unlayered CSS overrides @layer utilities and breaks
+   all spacing utilities (py-*, px-*, gap-*, etc.). */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #030712;
+  color: #e2e8f8;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: #030712; }
+::-webkit-scrollbar-thumb  { background: rgba(37,99,235,0.35); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(37,99,235,0.55); }
+
+/* ── Marquee Animation ─────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 36s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Seamless two-set marquee — animates exactly -50% (= one full set width) */
+@keyframes marquee-continuous {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee-continuous {
+  animation: marquee-continuous 30s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-continuous:hover {
+  animation-play-state: paused;
+}
+
+/* ── Glass Morphism Utility ────────────────────────────────────── */
+.glass {
+  background: rgba(13, 21, 37, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(148,163,184,0.08);
+}
+
+.glass-strong {
+  background: rgba(10, 16, 32, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(148,163,184,0.1);
+}
+
+/* ── Gradient Text ─────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gradient-text-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Glow Effects ──────────────────────────────────────────────── */
+.glow-blue {
+  box-shadow: 0 0 32px rgba(37,99,235,0.2), 0 0 64px rgba(37,99,235,0.08);
+}
+.glow-blue-sm {
+  box-shadow: 0 0 16px rgba(96,165,250,0.25);
+}
+
+/* ── Section Base ──────────────────────────────────────────────── */
+.section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+}
+
+/* ── Container ─────────────────────────────────────────────────── */
+.container-smaw {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5%, 2.5rem);
+}
+
+/* ── Badge / Label ─────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37,99,235,0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(37,99,235,0.2);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Mesh gradient bg ──────────────────────────────────────────── */
+.mesh-bg {
+  background:
+    radial-gradient(ellipse 60% 40% at 70% 20%, rgba(37,99,235,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(139,92,246,0.06) 0%, transparent 55%),
+    #030712;
 }
