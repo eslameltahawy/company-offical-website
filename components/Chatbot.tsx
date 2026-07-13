@@ -161,7 +161,7 @@ export default function Chatbot() {
               style={{ background: 'rgba(10,16,32,0.8)' }}
             >
               <div className="w-8 h-8 rounded-lg bg-[#2563eb] flex items-center justify-center glow-blue-sm flex-shrink-0">
-                <span className="text-white font-bold text-xs" style={{ fontFamily: 'Inter' }}>S</span>
+                <span className="text-white font-bold text-xs" style={{ fontFamily: 'Cairo' }}>S</span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>مساعد سماو</p>
@@ -273,3 +273,4 @@ export default function Chatbot() {
     </>
   )
 }
+

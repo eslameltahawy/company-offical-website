@@ -62,7 +62,7 @@ function ProductCard({
         <span
           className="text-[10px] font-bold px-2 py-1 rounded-full"
           style={{
-            fontFamily: 'Inter',
+            fontFamily: 'Cairo',
             background: isLive ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)',
             color: isLive ? '#10b981' : '#f59e0b',
             border: `1px solid ${isLive ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.2)'}`,
@@ -156,7 +156,7 @@ export default function ProductsSection() {
             className="flex items-center gap-3 mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-            <span className="text-xs font-bold text-[#10b981] uppercase tracking-widest" style={{ fontFamily: 'Inter' }}>
+            <span className="text-xs font-bold text-[#10b981] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
               متاح الآن — 4 منتجات
             </span>
             <div className="flex-1 h-px bg-[rgba(16,185,129,0.15)]" />
@@ -178,7 +178,7 @@ export default function ProductsSection() {
             className="flex items-center gap-3 mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-[#f59e0b]" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
-            <span className="text-xs font-bold text-[#f59e0b] uppercase tracking-widest" style={{ fontFamily: 'Inter' }}>
+            <span className="text-xs font-bold text-[#f59e0b] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
               قيد التطوير — 4 منتجات
             </span>
             <div className="flex-1 h-px bg-[rgba(245,158,11,0.15)]" />
@@ -217,3 +217,4 @@ export default function ProductsSection() {
     </section>
   )
 }
+

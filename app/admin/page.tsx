@@ -114,7 +114,7 @@ export default function AdminPage() {
     return (
       <div
         className="min-h-screen flex items-center justify-center"
-        style={{ background: '#030712', fontFamily: 'Inter' }}
+        style={{ background: '#030712', fontFamily: 'Cairo' }}
       >
         <div
           className="w-full max-w-sm rounded-2xl p-8 border"
@@ -174,7 +174,7 @@ export default function AdminPage() {
   return (
     <div
       className="min-h-screen"
-      style={{ background: '#030712', fontFamily: 'Inter', direction: 'rtl' }}
+      style={{ background: '#030712', fontFamily: 'Cairo', direction: 'rtl' }}
     >
       {/* Header */}
       <div
@@ -423,3 +423,4 @@ export default function AdminPage() {
     </div>
   )
 }
+

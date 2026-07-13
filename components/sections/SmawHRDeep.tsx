@@ -288,7 +288,7 @@ export default function SmawHRDeep() {
                       >
                         <p
                           className="text-3xl font-bold mb-1"
-                          style={{ fontFamily: 'Inter', color: mod.color }}
+                          style={{ fontFamily: 'Cairo', color: mod.color }}
                         >
                           {mod.stat.value}
                         </p>
@@ -334,7 +334,7 @@ export default function SmawHRDeep() {
               style={{ background: 'rgba(13,21,37,0.6)', borderColor: 'rgba(148,163,184,0.07)' }}
             >
               <i className={`${s.icon} text-[#60a5fa] text-sm mb-2 block`} />
-              <p className="text-xl font-bold text-[#e2e8f8] mb-0.5" style={{ fontFamily: 'Inter' }}>{s.value}</p>
+              <p className="text-xl font-bold text-[#e2e8f8] mb-0.5" style={{ fontFamily: 'Cairo' }}>{s.value}</p>
               <p className="text-[10px] text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>{s.label}</p>
             </div>
           ))}
@@ -344,3 +344,4 @@ export default function SmawHRDeep() {
     </section>
   )
 }
+

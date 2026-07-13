@@ -160,13 +160,13 @@ export default function Hero() {
                   </div>
                   <div
                     className="flex-1 mx-4 py-1 px-3 rounded text-[10px] text-[#3d5270] border border-[rgba(148,163,184,0.06)] text-center"
-                    style={{ fontFamily: 'Inter', background: 'rgba(0,0,0,0.3)' }}
+                    style={{ fontFamily: 'Cairo', background: 'rgba(0,0,0,0.3)' }}
                   >
                     smaww.com · منتجاتنا
                   </div>
                   <div
                     className="flex items-center gap-1 text-[10px] text-[#10b981] px-2 py-0.5 rounded bg-[#10b981]/10 border border-[#10b981]/20"
-                    style={{ fontFamily: 'Inter', fontWeight: 700 }}
+                    style={{ fontFamily: 'Cairo', fontWeight: 700 }}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
                     8 Products
@@ -177,7 +177,7 @@ export default function Hero() {
                 <div className="p-4" dir="rtl">
                   <div
                     className="text-[9px] text-[#3d5270] mb-3 font-bold uppercase tracking-[2px]"
-                    style={{ fontFamily: 'Inter' }}
+                    style={{ fontFamily: 'Cairo' }}
                   >
                     SMAW Product Suite
                   </div>
@@ -202,7 +202,7 @@ export default function Hero() {
                         <span
                           className="text-[11px] font-bold leading-none"
                           style={{
-                            fontFamily: 'Inter',
+                            fontFamily: 'Cairo',
                             color: p.live ? '#e2e8f8' : '#3d5270',
                             letterSpacing: '-0.01em',
                           }}
@@ -212,7 +212,7 @@ export default function Hero() {
                         <span
                           className="text-[8px] font-semibold uppercase tracking-wider"
                           style={{
-                            fontFamily: 'Inter',
+                            fontFamily: 'Cairo',
                             color: p.live ? '#10b981' : '#f59e0b',
                           }}
                         >
@@ -234,7 +234,7 @@ export default function Hero() {
                         className="rounded-lg p-2 text-center"
                         style={{ background: 'rgba(7,11,20,0.7)', border: '1px solid rgba(148,163,184,0.06)' }}
                       >
-                        <div className="text-sm font-bold" style={{ fontFamily: 'Inter', color: s.c }}>{s.v}</div>
+                        <div className="text-sm font-bold" style={{ fontFamily: 'Cairo', color: s.c }}>{s.v}</div>
                         <div className="text-[8px] text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{s.l}</div>
                       </div>
                     ))}
@@ -261,7 +261,7 @@ export default function Hero() {
             >
               <span
                 className="block text-2xl sm:text-3xl font-bold mb-1 gradient-text-blue"
-                style={{ fontFamily: 'Inter', letterSpacing: '-0.03em' }}
+                style={{ fontFamily: 'Cairo', letterSpacing: '-0.03em' }}
               >
                 {s.value}
               </span>
@@ -273,3 +273,4 @@ export default function Hero() {
     </section>
   )
 }
+

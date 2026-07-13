@@ -288,7 +288,7 @@ export default function HowItWorks() {
                   {/* Step number badge */}
                   <div
                     className="absolute -top-2 -right-2 w-9 h-9 rounded-xl flex items-center justify-center border-2 border-[#030712] font-bold text-white text-xs"
-                    style={{ background: step.color, fontFamily: 'Inter', boxShadow: `0 4px 12px ${step.color}50` }}
+                    style={{ background: step.color, fontFamily: 'Cairo', boxShadow: `0 4px 12px ${step.color}50` }}
                   >
                     {step.num}
                   </div>
@@ -355,3 +355,4 @@ export default function HowItWorks() {
     </section>
   )
 }
+

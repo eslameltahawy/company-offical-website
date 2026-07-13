@@ -199,7 +199,7 @@ export default function BookingCTA() {
                         type="tel" name="phone" value={fields.phone} onChange={onChange}
                         placeholder="0512345678"
                         className={inputCls('phone')}
-                        style={{ fontFamily: 'Inter', direction: 'ltr', textAlign: 'left' }}
+                        style={{ fontFamily: 'Cairo', direction: 'ltr', textAlign: 'left' }}
                       />
                       {errors.phone && <p className="text-xs text-red-400 mt-1" style={{ fontFamily: 'Cairo' }}>{errors.phone}</p>}
                     </div>
@@ -213,7 +213,7 @@ export default function BookingCTA() {
                         type="email" name="email" value={fields.email} onChange={onChange}
                         placeholder="name@company.com"
                         className={inputCls('email')}
-                        style={{ fontFamily: 'Inter', direction: 'ltr', textAlign: 'left' }}
+                        style={{ fontFamily: 'Cairo', direction: 'ltr', textAlign: 'left' }}
                       />
                       {errors.email && !errors.phone && <p className="text-xs text-red-400 mt-1" style={{ fontFamily: 'Cairo' }}>{errors.email}</p>}
                     </div>
@@ -256,3 +256,4 @@ export default function BookingCTA() {
     </section>
   )
 }
+

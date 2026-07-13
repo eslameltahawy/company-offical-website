@@ -78,7 +78,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     <span
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                       style={{
-                        fontFamily: 'Inter',
+                        fontFamily: 'Cairo',
                         background: product.status === 'live' ? '#10b98120' : 'rgba(245,158,11,0.12)',
                         color: product.status === 'live' ? '#10b981' : '#f59e0b',
                         border: `1px solid ${product.status === 'live' ? '#10b98130' : 'rgba(245,158,11,0.25)'}`,
@@ -115,7 +115,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     >
                       <div
                         className="text-xl font-bold mb-0.5"
-                        style={{ fontFamily: 'Inter', color: product.color }}
+                        style={{ fontFamily: 'Cairo', color: product.color }}
                       >
                         {s.value}
                       </div>
@@ -275,3 +275,4 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
     </AnimatePresence>
   )
 }
+

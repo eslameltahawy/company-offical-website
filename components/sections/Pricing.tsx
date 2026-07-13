@@ -178,7 +178,7 @@ export default function Pricing() {
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className="text-xs font-bold px-2.5 py-1 rounded-lg"
-                    style={{ background: `${tier.color}15`, color: tier.color, border: `1px solid ${tier.color}25`, fontFamily: 'Inter' }}
+                    style={{ background: `${tier.color}15`, color: tier.color, border: `1px solid ${tier.color}25`, fontFamily: 'Cairo' }}
                   >
                     {tier.nameEn}
                   </span>
@@ -187,7 +187,7 @@ export default function Pricing() {
 
                 {tier.priceMonthly > 0 ? (
                   <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold" style={{ fontFamily: 'Inter', color: tier.color }}>
+                    <span className="text-4xl font-bold" style={{ fontFamily: 'Cairo', color: tier.color }}>
                       {annual ? tier.priceAnnual : tier.priceMonthly}
                     </span>
                     <span className="text-sm text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{tier.unit}</span>
@@ -259,3 +259,4 @@ export default function Pricing() {
     </section>
   )
 }
+

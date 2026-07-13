@@ -106,7 +106,7 @@ export default function About() {
                 border: `1px solid ${s.color}20`,
               }}
             >
-              <p className="text-3xl font-bold mb-1" style={{ fontFamily: 'Inter', color: s.color }}>{s.value}</p>
+              <p className="text-3xl font-bold mb-1" style={{ fontFamily: 'Cairo', color: s.color }}>{s.value}</p>
               <p className="text-xs text-[#3d5270] leading-snug" style={{ fontFamily: 'Cairo' }}>{s.label}</p>
             </motion.div>
           ))}
@@ -155,7 +155,7 @@ export default function About() {
               >
                 <i className={`${card.icon} text-sm`} style={{ color: card.color }} />
               </div>
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: card.color, fontFamily: 'Inter' }}>{card.titleEn}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: card.color, fontFamily: 'Cairo' }}>{card.titleEn}</p>
               <h3 className="text-lg font-bold text-[#e2e8f8] mb-3" style={{ fontFamily: 'Cairo' }}>{card.title}</h3>
               <p className="text-sm text-[#7a93bc] leading-relaxed" style={{ fontFamily: 'Cairo' }}>{card.body}</p>
             </motion.div>
@@ -192,11 +192,11 @@ export default function About() {
               >
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3 font-black text-lg"
-                  style={{ background: `${v.color}18`, border: `1px solid ${v.color}35`, color: v.color, fontFamily: 'Inter' }}
+                  style={{ background: `${v.color}18`, border: `1px solid ${v.color}35`, color: v.color, fontFamily: 'Cairo' }}
                 >
                   {v.letter}
                 </div>
-                <p className="font-bold text-xs text-[#e2e8f8] mb-0.5" style={{ fontFamily: 'Inter' }}>{v.title}</p>
+                <p className="font-bold text-xs text-[#e2e8f8] mb-0.5" style={{ fontFamily: 'Cairo' }}>{v.title}</p>
                 <p className="text-[10px] font-semibold mb-2" style={{ color: v.color, fontFamily: 'Cairo' }}>{v.arabic}</p>
                 <p className="text-[11px] text-[#3d5270] leading-snug" style={{ fontFamily: 'Cairo' }}>{v.desc}</p>
               </motion.div>
@@ -236,12 +236,12 @@ export default function About() {
                       >
                         <i className={`${p.icon} text-sm`} style={{ color: p.color }} />
                       </div>
-                      <h4 className="text-xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Inter' }}>{p.name}</h4>
+                      <h4 className="text-xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>{p.name}</h4>
                     </div>
                     <p className="text-xs font-semibold" style={{ color: p.color, fontFamily: 'Cairo' }}>{p.tagline}</p>
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold" style={{ color: p.color, fontFamily: 'Inter' }}>{p.stat}</p>
+                    <p className="text-2xl font-bold" style={{ color: p.color, fontFamily: 'Cairo' }}>{p.stat}</p>
                     <p className="text-[10px] text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{p.statLabel}</p>
                   </div>
                 </div>
@@ -314,7 +314,7 @@ export default function About() {
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs"
-                    style={{ background: `${phase.color}20`, color: phase.color, fontFamily: 'Inter' }}
+                    style={{ background: `${phase.color}20`, color: phase.color, fontFamily: 'Cairo' }}
                   >
                     {phase.num}
                   </div>
@@ -341,7 +341,7 @@ export default function About() {
         >
           <div>
             <p className="text-xs text-[#3d5270] mb-1" style={{ fontFamily: 'Cairo' }}>الرقم الضريبي</p>
-            <p className="font-bold text-[#e2e8f8] text-sm" style={{ fontFamily: 'Inter' }}>7033115739</p>
+            <p className="font-bold text-[#e2e8f8] text-sm" style={{ fontFamily: 'Cairo' }}>7033115739</p>
           </div>
           {[
             { icon: 'fas fa-envelope', label: 'البريد الإلكتروني', value: 'smaw@smaww.com', href: 'mailto:smaw@smaww.com' },
@@ -361,7 +361,7 @@ export default function About() {
               </div>
               <div>
                 <p className="text-[10px] text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{item.label}</p>
-                <p className="text-sm font-semibold text-[#e2e8f8]" style={{ fontFamily: 'Inter' }}>{item.value}</p>
+                <p className="text-sm font-semibold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>{item.value}</p>
               </div>
             </a>
           ))}
@@ -386,3 +386,4 @@ export default function About() {
     </section>
   )
 }
+

@@ -50,7 +50,7 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Inter' }}>
+            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Cairo' }}>
               المنتجات
             </h4>
             <ul className="space-y-3">
@@ -70,7 +70,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Inter' }}>
+            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Cairo' }}>
               الشركة
             </h4>
             <ul className="space-y-3">
@@ -92,7 +92,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Inter' }}>
+            <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Cairo' }}>
               ابقَ على اطلاع
             </h4>
             <p className="text-xs text-[#7a93bc] mb-4 leading-relaxed" style={{ fontFamily: 'Cairo' }}>
@@ -136,3 +136,4 @@ export default function Footer() {
     </footer>
   )
 }
+

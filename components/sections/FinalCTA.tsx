@@ -88,7 +88,7 @@ export default function FinalCTA() {
           >
             {socialProof.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-3xl font-bold mb-1" style={{ fontFamily: 'Inter', color: '#60a5fa' }}>{s.value}</p>
+                <p className="text-3xl font-bold mb-1" style={{ fontFamily: 'Cairo', color: '#60a5fa' }}>{s.value}</p>
                 <p className="text-sm text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{s.label}</p>
               </div>
             ))}
@@ -140,3 +140,4 @@ export default function FinalCTA() {
     </section>
   )
 }
+

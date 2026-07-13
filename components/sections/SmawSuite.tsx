@@ -209,9 +209,9 @@ export default function SmawSuite() {
               style={{ width: 104, height: 104, left: 'calc(50% - 52px)', top: 'calc(50% - 52px)' }}
             >
               <div className="w-8 h-8 rounded-lg bg-[#2563eb] flex items-center justify-center mb-1 glow-blue-sm">
-                <span className="text-white font-bold text-sm" style={{ fontFamily: 'Inter' }}>S</span>
+                <span className="text-white font-bold text-sm" style={{ fontFamily: 'Cairo' }}>S</span>
               </div>
-              <span className="text-[9px] text-[#60a5fa] font-bold tracking-[1.5px]" style={{ fontFamily: 'Inter' }}>SUITE</span>
+              <span className="text-[9px] text-[#60a5fa] font-bold tracking-[1.5px]" style={{ fontFamily: 'Cairo' }}>SUITE</span>
               <span className="text-[8px] text-[#10b981] mt-0.5" style={{ fontFamily: 'Cairo' }}>AI مدمج</span>
             </motion.div>
 
@@ -264,7 +264,7 @@ export default function SmawSuite() {
                   {p.live && (
                     <span
                       className="absolute -top-1.5 -left-1 text-[6px] font-bold px-1.5 py-0.5 rounded-full bg-[#10b981] text-white"
-                      style={{ fontFamily: 'Inter' }}
+                      style={{ fontFamily: 'Cairo' }}
                     >
                       LIVE
                     </span>
@@ -303,7 +303,7 @@ export default function SmawSuite() {
                     <span
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                       style={{
-                        fontFamily: 'Inter',
+                        fontFamily: 'Cairo',
                         background: activePillar.live ? '#10b98120' : 'rgba(148,163,184,0.08)',
                         color: activePillar.live ? '#10b981' : '#7a93bc',
                         border: `1px solid ${activePillar.live ? '#10b98135' : 'rgba(148,163,184,0.1)'}`,
@@ -398,3 +398,4 @@ export default function SmawSuite() {
     </section>
   )
 }
+

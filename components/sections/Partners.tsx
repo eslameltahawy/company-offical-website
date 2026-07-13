@@ -21,7 +21,7 @@ export default function Partners() {
     <section className="py-10 border-y border-[rgba(148,163,184,0.07)] overflow-hidden" style={{ background: 'rgba(10,16,32,0.5)' }}>
       <p
         className="text-center text-[10px] uppercase tracking-[3px] text-[#3d5270] mb-6 font-semibold"
-        style={{ fontFamily: 'Inter' }}
+        style={{ fontFamily: 'Cairo' }}
       >
         Seamless Integration with Leading Platforms
       </p>
@@ -48,7 +48,7 @@ export default function Partners() {
               />
               <span
                 className="text-sm font-semibold transition-colors duration-300 group-hover:text-[#e2e8f8]"
-                style={{ fontFamily: 'Inter' }}
+                style={{ fontFamily: 'Cairo' }}
               >
                 {p.name}
               </span>
@@ -59,3 +59,4 @@ export default function Partners() {
     </section>
   )
 }
+

@@ -5,8 +5,8 @@
   ─────────────────
   Two identical flex-none sets inside one animated flex container.
   Animation: translateX(0) → translateX(-50%)
-  When set-1 fully exits left, set-2 is already right behind it → zero gap, infinite loop.
-  direction:ltr forces left-to-right scroll even on RTL pages.
+  Hover pauses the track (animation-play-state: paused via CSS).
+  No scale on hover — only pause.
 */
 
 const logos = [
@@ -16,7 +16,7 @@ const logos = [
   { name: 'Shopify',      icon: 'fab fa-shopify',    color: '#96bf48' },
   { name: 'Salesforce',   icon: 'fab fa-salesforce', color: '#00a1e0' },
   { name: 'Google Cloud', icon: 'fab fa-google',     color: '#4285F4' },
-  { name: 'Slack',        icon: 'fab fa-slack',      color: '#7c3aed' },
+  { name: 'Slack',        icon: 'fab fa-slack',      color: '#611f69' },
   { name: 'Zapier',       icon: 'fas fa-bolt',       color: '#ff4a00' },
   { name: 'HubSpot',      icon: 'fas fa-chart-line', color: '#ff7a59' },
   { name: 'SAP',          icon: 'fas fa-database',   color: '#0070f2' },
@@ -28,32 +28,28 @@ function LogoSet({ hidden }: { hidden?: boolean }) {
       {logos.map((logo) => (
         <div
           key={logo.name + (hidden ? '-b' : '-a')}
-          className="flex flex-none items-center gap-3 group cursor-default"
+          className="flex flex-none items-center gap-3 cursor-default"
           style={{ padding: '0 3rem' }}
         >
-          {/* Icon container */}
+          {/* Icon container — original brand color, no scale on hover */}
           <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0"
+            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{
-              background: 'rgba(148,163,184,0.05)',
-              border: '1px solid rgba(148,163,184,0.1)',
+              background: `${logo.color}14`,
+              border: `1px solid ${logo.color}28`,
             }}
           >
             <i
-              className={`${logo.icon} text-2xl`}
-              style={{
-                color: 'rgba(148,163,184,0.4)',
-                transition: 'color 0.3s',
-              }}
+              className={`${logo.icon} text-xl`}
+              style={{ color: logo.color }}
             />
           </div>
           {/* Name */}
           <span
             className="text-sm font-semibold whitespace-nowrap"
             style={{
-              fontFamily: 'Inter',
-              color: 'rgba(148,163,184,0.4)',
-              transition: 'color 0.3s',
+              fontFamily: 'Cairo',
+              color: `${logo.color}cc`,
             }}
           >
             {logo.name}
@@ -72,7 +68,7 @@ export default function Marquee() {
     >
       <p
         className="text-center text-[10px] uppercase tracking-[3px] text-[#3d5270] mb-8 font-semibold"
-        style={{ fontFamily: 'Inter' }}
+        style={{ fontFamily: 'Cairo' }}
       >
         تكامل سلس مع المنصات العالمية
       </p>
@@ -83,11 +79,10 @@ export default function Marquee() {
           maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
           overflow: 'hidden',
-          /* Force LTR so marquee always scrolls left regardless of page RTL */
           direction: 'ltr',
         }}
       >
-        {/* Animated track — two identical sets back-to-back */}
+        {/* Animated track — hover pauses via CSS, no scale */}
         <div
           className="flex animate-marquee-continuous"
           style={{ width: 'max-content' }}
