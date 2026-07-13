@@ -84,7 +84,7 @@ export default function FAQ() {
 
               <div className="mt-6 space-y-3">
                 {[
-                  { icon: 'fab fa-whatsapp', text: 'تواصل عبر واتساب', color: '#10b981' },
+                  { icon: 'fab fa-whatsapp', text: 'تواصل عبر واتساب', color: '#2563eb' },
                   { icon: 'fas fa-calendar-check', text: 'احجز موعداً الآن', color: '#2563eb' },
                 ].map((item) => (
                   <a

@@ -6,17 +6,17 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 const stats = [
   { value: '+50', label: 'شركة سعودية تستخدم منتجاتنا', color: '#2563eb' },
-  { value: '8', label: 'منتجات برمجية متخصصة', color: '#7c3aed' },
-  { value: '4+', label: 'سنوات خبرة في السوق', color: '#10b981' },
-  { value: '100%', label: 'سعودي الهوية والفريق', color: '#f59e0b' },
+  { value: '8', label: 'منتجات برمجية متخصصة', color: '#2563eb' },
+  { value: '4+', label: 'سنوات خبرة في السوق', color: '#2563eb' },
+  { value: '100%', label: 'سعودي الهوية والفريق', color: '#2563eb' },
 ]
 
 const values5S = [
   { letter: 'Q', title: 'Quality', arabic: 'الجودة', desc: 'لا نُسلّم إلا ما يصمد تحت أقصى ضغط', color: '#2563eb' },
-  { letter: 'Sp', title: 'Speed', arabic: 'السرعة', desc: 'نُنجز في ساعات ما يأخذ الآخرون أياماً', color: '#7c3aed' },
-  { letter: 'Sk', title: 'Spark', arabic: 'الإبداع', desc: 'نفكر خارج الصندوق في كل مشروع', color: '#10b981' },
-  { letter: 'Sc', title: 'Scale', arabic: 'التوسع', desc: 'نبني للنمو من اليوم الأول', color: '#f59e0b' },
-  { letter: 'Su', title: 'Support', arabic: 'الدعم', desc: 'لسنا بائعي برمجيات — نحن شركاء نجاحك', color: '#ef4444' },
+  { letter: 'Sp', title: 'Speed', arabic: 'السرعة', desc: 'نُنجز في ساعات ما يأخذ الآخرون أياماً', color: '#2563eb' },
+  { letter: 'Sk', title: 'Spark', arabic: 'الإبداع', desc: 'نفكر خارج الصندوق في كل مشروع', color: '#2563eb' },
+  { letter: 'Sc', title: 'Scale', arabic: 'التوسع', desc: 'نبني للنمو من اليوم الأول', color: '#2563eb' },
+  { letter: 'Su', title: 'Support', arabic: 'الدعم', desc: 'لسنا بائعي برمجيات — نحن شركاء نجاحك', color: '#2563eb' },
 ]
 
 const services = [
@@ -32,9 +32,9 @@ const services = [
 
 const methodologyPhases = [
   { num: '01', title: 'التخطيط الاستراتيجي', desc: 'تحليل المتطلبات وبناء خارطة المشروع الكاملة مع العميل', color: '#2563eb', icon: 'fas fa-map-marked-alt' },
-  { num: '02', title: 'التطوير التكراري', desc: 'دورات Agile قصيرة مع تسليم مستمر وتغذية راجعة دورية', color: '#7c3aed', icon: 'fas fa-sync-alt' },
-  { num: '03', title: 'ضمان الجودة', desc: 'اختبارات شاملة يدوية وآلية قبل كل إصدار', color: '#10b981', icon: 'fas fa-shield-check' },
-  { num: '04', title: 'التواصل المستمر', desc: 'تقارير أسبوعية وقناة تواصل مباشرة طوال المشروع', color: '#f59e0b', icon: 'fas fa-comments' },
+  { num: '02', title: 'التطوير التكراري', desc: 'دورات Agile قصيرة مع تسليم مستمر وتغذية راجعة دورية', color: '#2563eb', icon: 'fas fa-sync-alt' },
+  { num: '03', title: 'ضمان الجودة', desc: 'اختبارات شاملة يدوية وآلية قبل كل إصدار', color: '#2563eb', icon: 'fas fa-shield-check' },
+  { num: '04', title: 'التواصل المستمر', desc: 'تقارير أسبوعية وقناة تواصل مباشرة طوال المشروع', color: '#2563eb', icon: 'fas fa-comments' },
 ]
 
 const aboutProducts = [
@@ -42,7 +42,7 @@ const aboutProducts = [
     name: 'المنتجات المكتملة',
     tagline: 'جاهزة للاشتراك الآن',
     desc: 'SMAW HR وSMAW Connect وSMAW Theme وSMAW Lipr — أربعة منتجات مكتملة تخدم أكثر من 50 شركة سعودية. كل منتج يحل مشكلة حقيقية بأداء عالي وامتثال للوائح المحلية.',
-    color: '#10b981',
+    color: '#2563eb',
     icon: 'fas fa-check-circle',
     stat: '4 منتجات',
     statLabel: 'متاحة الآن',
@@ -51,7 +51,7 @@ const aboutProducts = [
     name: 'المنتجات قيد التطوير',
     tagline: 'إطلاق قريب',
     desc: 'SMAW Meet وSMAW Finance وSMAW Task وSMAW Archive — أربعة منتجات في مراحل نهائية من التطوير. سجّل اهتمامك للحصول على وصول مبكر وأسعار إطلاق حصرية.',
-    color: '#f59e0b',
+    color: '#2563eb',
     icon: 'fas fa-rocket',
     stat: '4 منتجات',
     statLabel: 'قيد التطوير',
@@ -127,14 +127,14 @@ export default function About() {
               title: 'مهمتنا',
               titleEn: 'Mission',
               body: 'تسليم منتجات وأنظمة برمجية عالية الأداء تُشغّل شركات حقيقية وتصمد تحت أقصى ضغط — بدون تعقيد، وبدون مفاجآت.',
-              color: '#7c3aed',
+              color: '#2563eb',
             },
             {
               icon: 'fas fa-flag',
               title: 'هدفنا الاستراتيجي',
               titleEn: 'Goal',
               body: 'قيادة السوق في مجال البنية التقنية الهجينة والأدوات المدعومة بالذكاء الاصطناعي — مع الحفاظ على هويتنا السعودية 100%.',
-              color: '#10b981',
+              color: '#2563eb',
             },
           ].map((card, i) => (
             <motion.div
@@ -386,4 +386,5 @@ export default function About() {
     </section>
   )
 }
+
 

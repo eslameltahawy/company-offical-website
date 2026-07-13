@@ -53,7 +53,7 @@ export const products: Product[] = [
     name: 'SMAW Connect',
     tagline: 'نظام دعم العملاء وإدارة التذاكر',
     icon: 'fas fa-headset',
-    color: '#7c3aed',
+    color: '#2563eb',
     status: 'live',
     problem:
       'فرق دعم العملاء تُدير الشكاوى والطلبات عبر الواتساب والبريد الإلكتروني بدون نظام — مما يُسبّب ضياع التذاكر، تأخر الردود، وعدم قياس رضا العملاء.',
@@ -86,7 +86,7 @@ export const products: Product[] = [
     name: 'SMAW Theme',
     tagline: 'هوية بصرية مؤسسية لسطح المكتب والمتصفح',
     icon: 'fas fa-palette',
-    color: '#0891b2',
+    color: '#2563eb',
     status: 'live',
     problem:
       'الشركات تفتقر لهوية بصرية موحّدة على أجهزة الموظفين — سطح المكتب والمتصفح بدون تخصيص مؤسسي يُضعف الانتماء ويُفرّق تجربة العمل.',
@@ -119,7 +119,7 @@ export const products: Product[] = [
     name: 'SMAW Lipr',
     tagline: 'صانع الأوامر الذكي ومكتبة أدوات AI العربية',
     icon: 'fas fa-robot',
-    color: '#059669',
+    color: '#2563eb',
     status: 'live',
     problem:
       'المحترفون العرب يستخدمون أدوات الذكاء الاصطناعي بطريقة عشوائية — أوامر ضعيفة ونتائج مخيبة وتشتت بين مئات الأدوات بدون دليل منظّم.',
@@ -152,7 +152,7 @@ export const products: Product[] = [
     name: 'SMAW Meet',
     tagline: 'اجتماعات فيديو مؤسسية مشفّرة بمحاضر تلقائية',
     icon: 'fas fa-video',
-    color: '#d97706',
+    color: '#2563eb',
     status: 'development',
     problem:
       'الشركات تعتمد على Zoom وTeams أجنبية لا تدعم العربية بالكامل ولا تتكامل مع أنظمتها الداخلية، مع خوف دائم على خصوصية البيانات.',
@@ -179,7 +179,7 @@ export const products: Product[] = [
     name: 'SMAW Finance',
     tagline: 'محاسبة وفاتورة إلكترونية متوافقة مع ZATCA',
     icon: 'fas fa-file-invoice-dollar',
-    color: '#be185d',
+    color: '#2563eb',
     status: 'development',
     problem:
       'الشركات السعودية تستخدم برامج محاسبة عالمية لا تلتزم بمتطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) للفاتورة الإلكترونية، مما يُعرّضها لغرامات.',
@@ -206,7 +206,7 @@ export const products: Product[] = [
     name: 'SMAW Task',
     tagline: 'إدارة المهام والمشاريع بذكاء اصطناعي',
     icon: 'fas fa-tasks',
-    color: '#0d9488',
+    color: '#2563eb',
     status: 'development',
     problem:
       'الفرق تُتابع مهامها عبر رسائل واتساب ومجموعات لا تنظيم فيها — مما يُسبّب ضياع المهام، تأخر التسليم، وغياب المساءلة.',
@@ -233,7 +233,7 @@ export const products: Product[] = [
     name: 'SMAW Archive',
     tagline: 'أرشفة رقمية سحابية ذكية بلا ورق',
     icon: 'fas fa-archive',
-    color: '#7c3aed',
+    color: '#2563eb',
     status: 'development',
     problem:
       'الشركات تغرق في ملفات ورقية وطوابير توقيع — الوثائق المهمة تضيع، صلاحيات الوصول غير منظّمة، واسترجاع أي مستند يأخذ ساعات.',
@@ -256,3 +256,4 @@ export const products: Product[] = [
     audience: ['الإدارات القانونية والمالية', 'شركات تُنتج كميات كبيرة من الوثائق', 'المؤسسات الحكومية والشبه حكومية'],
   },
 ]
+

@@ -63,9 +63,9 @@ function ProductCard({
           className="text-[10px] font-bold px-2 py-1 rounded-full"
           style={{
             fontFamily: 'Cairo',
-            background: isLive ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)',
-            color: isLive ? '#10b981' : '#f59e0b',
-            border: `1px solid ${isLive ? 'rgba(16,185,129,0.25)' : 'rgba(245,158,11,0.2)'}`,
+            background: isLive ? 'rgba(37,99,235,0.12)' : 'rgba(148,163,184,0.07)',
+            color: isLive ? '#60a5fa' : '#7a93bc',
+            border: `1px solid ${isLive ? 'rgba(37,99,235,0.28)' : 'rgba(148,163,184,0.14)'}`,
           }}
         >
           {isLive ? '● Live' : '⚙ قريباً'}
@@ -155,8 +155,8 @@ export default function ProductsSection() {
             transition={{ duration: 0.4 }}
             className="flex items-center gap-3 mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-            <span className="text-xs font-bold text-[#10b981] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
+            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
+            <span className="text-xs font-bold text-[#60a5fa] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
               متاح الآن — 4 منتجات
             </span>
             <div className="flex-1 h-px bg-[rgba(16,185,129,0.15)]" />
@@ -177,8 +177,8 @@ export default function ProductsSection() {
             transition={{ duration: 0.4 }}
             className="flex items-center gap-3 mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-[#f59e0b]" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
-            <span className="text-xs font-bold text-[#f59e0b] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
+            <span className="w-2 h-2 rounded-full bg-[#3d5270]" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
+            <span className="text-xs font-bold text-[#7a93bc] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
               قيد التطوير — 4 منتجات
             </span>
             <div className="flex-1 h-px bg-[rgba(245,158,11,0.15)]" />

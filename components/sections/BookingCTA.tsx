@@ -143,8 +143,8 @@ export default function BookingCTA() {
                     exit={{ opacity: 0 }}
                     className="flex flex-col items-center text-center py-10"
                   >
-                    <div className="w-16 h-16 rounded-full bg-[#10b981]/15 border border-[#10b981]/30 flex items-center justify-center mb-5">
-                      <i className="fas fa-check text-[#10b981] text-2xl" />
+                    <div className="w-16 h-16 rounded-full bg-[#2563eb]/15 border border-[#2563eb]/30 flex items-center justify-center mb-5">
+                      <i className="fas fa-check text-[#2563eb] text-2xl" />
                     </div>
                     <h3 className="text-xl font-bold text-[#e2e8f8] mb-2" style={{ fontFamily: 'Cairo' }}>
                       تم استلام طلبك!
@@ -256,4 +256,5 @@ export default function BookingCTA() {
     </section>
   )
 }
+
 

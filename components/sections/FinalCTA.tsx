@@ -44,11 +44,11 @@ export default function FinalCTA() {
               style={{
                 background: 'rgba(16,185,129,0.1)',
                 border: '1px solid rgba(16,185,129,0.25)',
-                color: '#10b981',
+                color: '#2563eb',
                 fontFamily: 'Cairo',
               }}
             >
-              <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
               شركات جديدة تنضم كل أسبوع
             </div>
           </motion.div>
@@ -140,4 +140,5 @@ export default function FinalCTA() {
     </section>
   )
 }
+
 

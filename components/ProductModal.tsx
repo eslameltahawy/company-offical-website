@@ -79,9 +79,9 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                       style={{
                         fontFamily: 'Cairo',
-                        background: product.status === 'live' ? '#10b98120' : 'rgba(245,158,11,0.12)',
-                        color: product.status === 'live' ? '#10b981' : '#f59e0b',
-                        border: `1px solid ${product.status === 'live' ? '#10b98130' : 'rgba(245,158,11,0.25)'}`,
+                        background: product.status === 'live' ? 'rgba(37,99,235,0.15)' : 'rgba(148,163,184,0.08)',
+                        color: product.status === 'live' ? '#60a5fa' : '#7a93bc',
+                        border: `1px solid ${product.status === 'live' ? 'rgba(37,99,235,0.3)' : 'rgba(148,163,184,0.15)'}`,
                       }}
                     >
                       {product.status === 'live' ? '● متاح الآن' : '⚙ قيد التطوير'}
@@ -130,21 +130,21 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               {/* Problem */}
               <div
                 className="rounded-xl p-4"
-                style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.15)' }}
+                style={{ background: 'rgba(10,16,32,0.8)', border: '1px solid rgba(148,163,184,0.12)' }}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <i className="fas fa-exclamation-triangle text-[#ef4444] text-xs" />
-                  <span className="text-xs font-bold text-[#ef4444]" style={{ fontFamily: 'Cairo' }}>
+                  <i className="fas fa-exclamation-triangle text-[#7a93bc] text-xs" />
+                  <span className="text-xs font-bold text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>
                     المشكلة
                   </span>
                 </div>
-                <p className="text-sm text-[#c4b5b5] leading-relaxed mb-3" style={{ fontFamily: 'Cairo' }}>
+                <p className="text-sm text-[#7a93bc] leading-relaxed mb-3" style={{ fontFamily: 'Cairo' }}>
                   {product.problem}
                 </p>
                 <ul className="space-y-1.5">
                   {product.problemPoints.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2 text-xs text-[#b0a0a0]" style={{ fontFamily: 'Cairo' }}>
-                      <i className="fas fa-times text-[#ef4444] text-[10px] mt-0.5 flex-shrink-0" />
+                    <li key={pt} className="flex items-start gap-2 text-xs text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>
+                      <i className="fas fa-minus text-[#3d5270] text-[10px] mt-0.5 flex-shrink-0" />
                       {pt}
                     </li>
                   ))}
@@ -154,21 +154,21 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               {/* Solution */}
               <div
                 className="rounded-xl p-4"
-                style={{ background: 'rgba(16,185,129,0.05)', border: '1px solid rgba(16,185,129,0.15)' }}
+                style={{ background: 'rgba(37,99,235,0.06)', border: '1px solid rgba(37,99,235,0.18)' }}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <i className="fas fa-check-circle text-[#10b981] text-xs" />
-                  <span className="text-xs font-bold text-[#10b981]" style={{ fontFamily: 'Cairo' }}>
+                  <i className="fas fa-check-circle text-[#60a5fa] text-xs" />
+                  <span className="text-xs font-bold text-[#60a5fa]" style={{ fontFamily: 'Cairo' }}>
                     الحل
                   </span>
                 </div>
-                <p className="text-sm text-[#a8c4b5] leading-relaxed mb-3" style={{ fontFamily: 'Cairo' }}>
+                <p className="text-sm text-[#7a93bc] leading-relaxed mb-3" style={{ fontFamily: 'Cairo' }}>
                   {product.solution}
                 </p>
                 <ul className="space-y-2">
                   {product.solutionBullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5 text-sm text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-                      <i className="fas fa-check text-[#10b981] text-[10px] mt-0.5 flex-shrink-0" />
+                      <i className="fas fa-check text-[#60a5fa] text-[10px] mt-0.5 flex-shrink-0" />
                       {b}
                     </li>
                   ))}

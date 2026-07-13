@@ -5,21 +5,24 @@
   ─────────────────
   Two identical flex-none sets inside one animated flex container.
   Animation: translateX(0) → translateX(-50%)
-  Hover pauses the track (animation-play-state: paused via CSS).
-  No scale on hover — only pause.
+  Hover pauses the track — no scale.
+  All logos use the single brand blue for a unified palette.
 */
 
+const BLUE = '#2563eb'
+
 const logos = [
-  { name: 'Stripe',       icon: 'fab fa-stripe-s',  color: '#635bff' },
-  { name: 'Azure',        icon: 'fab fa-microsoft', color: '#00a4ef' },
-  { name: 'AWS',          icon: 'fab fa-aws',        color: '#FF9900' },
-  { name: 'Shopify',      icon: 'fab fa-shopify',    color: '#96bf48' },
-  { name: 'Salesforce',   icon: 'fab fa-salesforce', color: '#00a1e0' },
-  { name: 'Google Cloud', icon: 'fab fa-google',     color: '#4285F4' },
-  { name: 'Slack',        icon: 'fab fa-slack',      color: '#611f69' },
-  { name: 'Zapier',       icon: 'fas fa-bolt',       color: '#ff4a00' },
-  { name: 'HubSpot',      icon: 'fas fa-chart-line', color: '#ff7a59' },
-  { name: 'SAP',          icon: 'fas fa-database',   color: '#0070f2' },
+  { name: 'Stripe',       icon: 'fab fa-stripe-s'   },
+  { name: 'Azure',        icon: 'fab fa-microsoft'   },
+  { name: 'AWS',          icon: 'fab fa-aws'         },
+  { name: 'Shopify',      icon: 'fab fa-shopify'     },
+  { name: 'Salesforce',   icon: 'fab fa-salesforce'  },
+  { name: 'Google Cloud', icon: 'fab fa-google'      },
+  { name: 'Slack',        icon: 'fab fa-slack'       },
+  { name: 'Salla',        icon: 'fas fa-store'       },
+  { name: 'Zapier',       icon: 'fas fa-bolt'        },
+  { name: 'HubSpot',      icon: 'fas fa-chart-line'  },
+  { name: 'SAP',          icon: 'fas fa-database'    },
 ]
 
 function LogoSet({ hidden }: { hidden?: boolean }) {
@@ -31,26 +34,18 @@ function LogoSet({ hidden }: { hidden?: boolean }) {
           className="flex flex-none items-center gap-3 cursor-default"
           style={{ padding: '0 3rem' }}
         >
-          {/* Icon container — original brand color, no scale on hover */}
           <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{
-              background: `${logo.color}14`,
-              border: `1px solid ${logo.color}28`,
+              background: `${BLUE}12`,
+              border: `1px solid ${BLUE}28`,
             }}
           >
-            <i
-              className={`${logo.icon} text-xl`}
-              style={{ color: logo.color }}
-            />
+            <i className={`${logo.icon} text-lg`} style={{ color: BLUE }} />
           </div>
-          {/* Name */}
           <span
             className="text-sm font-semibold whitespace-nowrap"
-            style={{
-              fontFamily: 'Cairo',
-              color: `${logo.color}cc`,
-            }}
+            style={{ fontFamily: 'Cairo', color: 'rgba(148,163,184,0.5)' }}
           >
             {logo.name}
           </span>
@@ -73,7 +68,6 @@ export default function Marquee() {
         تكامل سلس مع المنصات العالمية
       </p>
 
-      {/* Fade edges */}
       <div
         style={{
           maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
@@ -82,7 +76,6 @@ export default function Marquee() {
           direction: 'ltr',
         }}
       >
-        {/* Animated track — hover pauses via CSS, no scale */}
         <div
           className="flex animate-marquee-continuous"
           style={{ width: 'max-content' }}

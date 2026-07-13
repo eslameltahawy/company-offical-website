@@ -17,7 +17,7 @@ const testimonials = [
     role: 'المديرة التنفيذية',
     company: 'شركة خدمات لوجستية — جدة',
     initial: 'م',
-    color: '#7c3aed',
+    color: '#2563eb',
   },
   {
     quote: 'عملية إعداد نظام حماية الأجور كانت مقلقة، لكن الفريق أرشدنا خطوة بخطوة حتى الاعتماد.',
@@ -25,7 +25,7 @@ const testimonials = [
     role: 'CFO',
     company: 'شركة تقنية ناشئة — الدمام',
     initial: 'ف',
-    color: '#059669',
+    color: '#2563eb',
   },
   {
     quote: 'وفّر علينا النظام ساعات طويلة كل شهر في إعداد الشؤون الإدارية. بسيط وعملي.',
@@ -33,7 +33,7 @@ const testimonials = [
     role: 'مسؤولة الموارد البشرية',
     company: 'شركة تجزئة — الرياض',
     initial: 'هـ',
-    color: '#d97706',
+    color: '#2563eb',
   },
   {
     quote: 'أعجبني أن النظام يفهم اللوائح المحلية. لم أكن أتوقع هذا المستوى من التوافق مع نظام العمل السعودي.',
@@ -41,7 +41,7 @@ const testimonials = [
     role: 'مدير العمليات',
     company: 'شركة توزيع غذائي — القصيم',
     initial: 'خ',
-    color: '#0891b2',
+    color: '#2563eb',
   },
   {
     quote: 'الواجهة واضحة ولا تحتاج لتدريب مطوّل. الموظفون تكيّفوا معها بسرعة.',
@@ -65,7 +65,7 @@ const testimonials = [
     role: 'المحاسب الرئيسي',
     company: 'شركة خدمات طبية — الرياض',
     initial: 'س',
-    color: '#7c3aed',
+    color: '#2563eb',
   },
 ]
 
@@ -122,7 +122,7 @@ export default function Testimonials() {
               {/* Stars */}
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: 5 }).map((_, j) => (
-                  <i key={j} className="fas fa-star text-[#f59e0b] text-[10px]" />
+                  <i key={j} className="fas fa-star text-[#60a5fa] text-[10px]" />
                 ))}
               </div>
 
@@ -159,3 +159,4 @@ export default function Testimonials() {
     </section>
   )
 }
+

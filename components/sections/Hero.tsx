@@ -18,13 +18,13 @@ const stats = [
 
 const products = [
   { name: 'HR',      live: true,  color: '#2563eb' },
-  { name: 'Connect', live: true,  color: '#7c3aed' },
-  { name: 'Theme',   live: true,  color: '#0891b2' },
-  { name: 'Lipr',    live: true,  color: '#059669' },
-  { name: 'Meet',    live: false, color: '#d97706' },
-  { name: 'Finance', live: false, color: '#be185d' },
-  { name: 'Task',    live: false, color: '#0d9488' },
-  { name: 'Archive', live: false, color: '#7c3aed' },
+  { name: 'Connect', live: true,  color: '#2563eb' },
+  { name: 'Theme',   live: true,  color: '#2563eb' },
+  { name: 'Lipr',    live: true,  color: '#2563eb' },
+  { name: 'Meet',    live: false, color: '#2563eb' },
+  { name: 'Finance', live: false, color: '#2563eb' },
+  { name: 'Task',    live: false, color: '#2563eb' },
+  { name: 'Archive', live: false, color: '#2563eb' },
 ]
 
 // Headline split for word-by-word animation
@@ -61,7 +61,7 @@ export default function Hero() {
           <div>
             <motion.div {...fadeUp(0)}>
               <span className="badge mb-6 inline-flex gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
                 Software Product House · Saudi-native
               </span>
             </motion.div>
@@ -121,7 +121,7 @@ export default function Hero() {
                 {['م', 'ف', 'خ', 'ع', 'ن'].map((l, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#030712] bg-gradient-to-br from-[#2563eb] to-[#7c3aed] flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                    className="w-8 h-8 rounded-full border-2 border-[#030712] bg-gradient-to-br from-[#2563eb] to-[#1d4ed8] flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
                     style={{ zIndex: 5 - i }}
                   >
                     {l}
@@ -154,8 +154,8 @@ export default function Hero() {
                   style={{ background: 'rgba(10,16,32,0.9)' }}
                 >
                   <div className="flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#3d5270]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#3d5270]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
                   </div>
                   <div
@@ -165,10 +165,10 @@ export default function Hero() {
                     smaww.com · منتجاتنا
                   </div>
                   <div
-                    className="flex items-center gap-1 text-[10px] text-[#10b981] px-2 py-0.5 rounded bg-[#10b981]/10 border border-[#10b981]/20"
+                    className="flex items-center gap-1 text-[10px] text-[#60a5fa] px-2 py-0.5 rounded bg-[#2563eb]/10 border border-[#2563eb]/20"
                     style={{ fontFamily: 'Cairo', fontWeight: 700 }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
                     8 Products
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function Hero() {
                           className="text-[8px] font-semibold uppercase tracking-wider"
                           style={{
                             fontFamily: 'Cairo',
-                            color: p.live ? '#10b981' : '#f59e0b',
+                            color: p.live ? '#60a5fa' : '#3d5270',
                           }}
                         >
                           {p.live ? 'Live' : 'Soon'}
@@ -225,9 +225,9 @@ export default function Hero() {
                   {/* Mini stats */}
                   <div className="mt-3 grid grid-cols-3 gap-2">
                     {[
-                      { v: '4', l: 'منتجات نشطة', c: '#10b981' },
+                      { v: '4', l: 'منتجات نشطة', c: '#2563eb' },
                       { v: '50+', l: 'شركة', c: '#60a5fa' },
-                      { v: '100%', l: 'سعودي', c: '#a78bfa' },
+                      { v: '100%', l: 'سعودي', c: '#60a5fa' },
                     ].map((s) => (
                       <div
                         key={s.l}
@@ -273,4 +273,5 @@ export default function Hero() {
     </section>
   )
 }
+
 
