@@ -24,12 +24,18 @@ function SmawLogo({ size = 30 }: { size?: number }) {
 
 const footerLinks = {
   products: [
-    { label: 'Ocean67 eCommerce', href: '#' },
-    { label: 'SMAW HR', href: '#suite' },
-    { label: 'SMAW Suite', href: '#suite' },
+    { label: 'SMAW HR', href: '#products' },
+    { label: 'SMAW Connect', href: '#products' },
+    { label: 'SMAW Theme', href: '#products' },
+    { label: 'SMAW Lipr', href: '#products' },
+    { label: 'SMAW Meet', href: '#products' },
+    { label: 'SMAW Finance', href: '#products' },
+    { label: 'SMAW Task', href: '#products' },
+    { label: 'SMAW Archive', href: '#products' },
   ],
   company: [
     { label: 'من نحن', href: '#about' },
+    { label: 'لماذا سماو', href: '#why' },
     { label: 'بروفايل الشركة', href: '/company-profile.pdf', download: 'SMAW-Company-Profile.pdf' },
     { label: 'تواصل معنا', href: '#booking' },
   ],
@@ -57,7 +63,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-[#7a93bc] leading-relaxed max-w-[240px]" style={{ fontFamily: 'Cairo' }}>
-              بيت منتجات برمجية سعودي 100% — نبني برامج تُشغّل الشركات وتصمد تحت أقصى ضغط.
+              بيت منتجات برمجية سعودي — متخصصون في بناء أنظمة إدارة المؤسسات للشركات السعودية.
             </p>
             <div className="flex items-center gap-1 mt-4">
               <span className="text-xs text-[#3d5270] flex items-center gap-1.5" style={{ fontFamily: 'Cairo' }}>
@@ -114,7 +120,7 @@ export default function Footer() {
               ابقَ على اطلاع
             </h4>
             <p className="text-xs text-[#7a93bc] mb-4 leading-relaxed" style={{ fontFamily: 'Cairo' }}>
-              أخبار المنتج والإصدارات الجديدة — مباشرة إلى بريدك.
+              كن أول من يعلم بإطلاق منتجاتنا الجديدة والتحديثات.
             </p>
             <form
               onSubmit={(e) => e.preventDefault()}

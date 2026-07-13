@@ -34,8 +34,8 @@ function SmawLogo({ size = 34 }: { size?: number }) {
 }
 
 const links = [
-  { label: 'المنتجات', href: '#suite' },
-  { label: 'خدماتنا', href: '#features' },
+  { label: 'منتجاتنا', href: '#products' },
+  { label: 'لماذا سماو', href: '#why' },
   { label: 'عن سماو', href: '#about' },
   { label: 'العملاء', href: '#testimonials' },
 ]

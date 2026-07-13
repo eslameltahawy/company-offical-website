@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 const stats = [
-  { value: '+50', label: 'عميل نشط', color: '#2563eb' },
-  { value: '4+', label: 'سنوات في السوق', color: '#7c3aed' },
-  { value: '10M+', label: 'ريال مبيعات شهرية عبر Ocean67', color: '#10b981' },
+  { value: '+50', label: 'شركة سعودية تستخدم منتجاتنا', color: '#2563eb' },
+  { value: '8', label: 'منتجات برمجية متخصصة', color: '#7c3aed' },
+  { value: '4+', label: 'سنوات خبرة في السوق', color: '#10b981' },
   { value: '100%', label: 'سعودي الهوية والفريق', color: '#f59e0b' },
 ]
 
@@ -25,7 +25,7 @@ const services = [
   { icon: 'fas fa-plug', title: 'تكامل API', desc: 'ربط أنظمتك مع أي خدمة خارجية بسلاسة' },
   { icon: 'fas fa-server', title: 'DevOps & البنية التحتية', desc: 'CI/CD وإدارة الخوادم والسحابة' },
   { icon: 'fas fa-brain', title: 'الذكاء الاصطناعي', desc: 'دمج AI في منتجاتك لتعزيز الكفاءة' },
-  { icon: 'fas fa-robot', title: 'الأتمتة والأتمتة', desc: 'أتمتة العمليات المتكررة لتحرير طاقة فريقك' },
+  { icon: 'fas fa-robot', title: 'الأتمتة الذكية', desc: 'أتمتة العمليات المتكررة لتحرير طاقة فريقك' },
   { icon: 'fas fa-lightbulb', title: 'استشارات تقنية', desc: 'نساعدك في الاختيار الصحيح من البداية' },
   { icon: 'fas fa-paint-brush', title: 'تصميم UI/UX', desc: 'واجهات أنيقة تُبهج المستخدم وتزيد التحويل' },
 ]
@@ -37,24 +37,24 @@ const methodologyPhases = [
   { num: '04', title: 'التواصل المستمر', desc: 'تقارير أسبوعية وقناة تواصل مباشرة طوال المشروع', color: '#f59e0b', icon: 'fas fa-comments' },
 ]
 
-const products = [
+const aboutProducts = [
   {
-    name: 'Ocean67',
-    tagline: 'منصة التجارة الإلكترونية',
-    desc: 'منصة متكاملة تُدير المتاجر الإلكترونية بحجم تداول يتجاوز 10 مليون ريال شهرياً. مبنية على بنية هجينة تدعم آلاف المنتجات والطلبات المتزامنة.',
+    name: 'المنتجات المكتملة',
+    tagline: 'جاهزة للاشتراك الآن',
+    desc: 'SMAW HR وSMAW Connect وSMAW Theme وSMAW Lipr — أربعة منتجات مكتملة تخدم أكثر من 50 شركة سعودية. كل منتج يحل مشكلة حقيقية بأداء عالي وامتثال للوائح المحلية.',
     color: '#10b981',
-    icon: 'fas fa-store',
-    stat: '10M+ ريال/شهر',
-    statLabel: 'حجم مبيعات',
+    icon: 'fas fa-check-circle',
+    stat: '4 منتجات',
+    statLabel: 'متاحة الآن',
   },
   {
-    name: 'SMAW Suite',
-    tagline: 'نظام إدارة الموارد البشرية',
-    desc: 'منظومة متكاملة لإدارة الموارد البشرية — رواتب WPS، حضور، إجازات، GOSI، تقييم أداء، وأرشفة وثائق — كل ذلك في منصة واحدة 100% متوافقة مع اللوائح السعودية.',
-    color: '#2563eb',
-    icon: 'fas fa-users-cog',
-    stat: '48 ساعة',
-    statLabel: 'وقت التشغيل',
+    name: 'المنتجات قيد التطوير',
+    tagline: 'إطلاق قريب',
+    desc: 'SMAW Meet وSMAW Finance وSMAW Task وSMAW Archive — أربعة منتجات في مراحل نهائية من التطوير. سجّل اهتمامك للحصول على وصول مبكر وأسعار إطلاق حصرية.',
+    color: '#f59e0b',
+    icon: 'fas fa-rocket',
+    stat: '4 منتجات',
+    statLabel: 'قيد التطوير',
   },
 ]
 
@@ -209,11 +209,11 @@ export default function About() {
           <div className="text-center mb-10">
             <span className="badge mb-3">PRODUCTS</span>
             <h3 className="text-2xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-              منتجاتنا — <span className="gradient-text">نبني ما نعيش به</span>
+              منتجاتنا — <span className="gradient-text">8 حلول لإدارة شركتك</span>
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {products.map((p, i) => (
+            {aboutProducts.map((p, i) => (
               <motion.div
                 key={p.name}
                 initial={{ opacity: 0, x: i === 0 ? 24 : -24 }}
