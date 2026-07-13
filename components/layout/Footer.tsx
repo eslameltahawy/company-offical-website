@@ -1,26 +1,5 @@
 'use client'
 
-function SmawLogo({ size = 30 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="17" cy="17" rx="15.5" ry="6.5" stroke="#2563eb" strokeWidth="1.1" opacity="0.35" transform="rotate(-30 17 17)" />
-      <ellipse cx="17" cy="17" rx="11" ry="4.5" stroke="#3b82f6" strokeWidth="1" opacity="0.55" transform="rotate(20 17 17)" />
-      <circle cx="17" cy="17" r="8" fill="rgba(37,99,235,0.18)" />
-      <circle cx="17" cy="17" r="6" fill="#1d4ed8" />
-      <circle cx="17" cy="17" r="6" fill="url(#planetGradF)" />
-      <text x="17" y="21.5" textAnchor="middle" fill="white" fontSize="9" fontWeight="800" fontFamily="Inter, sans-serif">S</text>
-      <circle cx="30" cy="11.5" r="2.2" fill="#60a5fa" opacity="0.9" />
-      <circle cx="30" cy="11.5" r="1" fill="white" opacity="0.6" />
-      <circle cx="5" cy="22" r="1.4" fill="#818cf8" opacity="0.7" />
-      <defs>
-        <radialGradient id="planetGradF" cx="38%" cy="35%" r="65%">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-    </svg>
-  )
-}
 
 const footerLinks = {
   products: [
@@ -56,11 +35,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <SmawLogo size={30} />
-              <span className="font-bold text-[#e2e8f8]" style={{ fontFamily: 'Inter', letterSpacing: '-0.02em' }}>
-                SMAW
-              </span>
+            <div className="mb-4">
+              <img src="/smaw.png" alt="SMAW" style={{ height: 28, width: 'auto' }} />
             </div>
             <p className="text-sm text-[#7a93bc] leading-relaxed max-w-[240px]" style={{ fontFamily: 'Cairo' }}>
               بيت منتجات برمجية سعودي — متخصصون في بناء أنظمة إدارة المؤسسات للشركات السعودية.

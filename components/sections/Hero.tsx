@@ -16,15 +16,24 @@ const stats = [
   { value: '100٪', label: 'سعودي الهوية' },
 ]
 
-const productIcons = [
-  { icon: 'fas fa-users',               color: '#2563eb', name: 'HR',      live: true },
-  { icon: 'fas fa-headset',             color: '#7c3aed', name: 'Connect', live: true },
-  { icon: 'fas fa-palette',             color: '#0891b2', name: 'Theme',   live: true },
-  { icon: 'fas fa-robot',               color: '#059669', name: 'Lipr',    live: true },
-  { icon: 'fas fa-video',               color: '#d97706', name: 'Meet',    live: false },
-  { icon: 'fas fa-file-invoice-dollar', color: '#be185d', name: 'Finance', live: false },
-  { icon: 'fas fa-tasks',               color: '#0d9488', name: 'Task',    live: false },
-  { icon: 'fas fa-archive',             color: '#7c3aed', name: 'Archive', live: false },
+const products = [
+  { name: 'HR',      live: true,  color: '#2563eb' },
+  { name: 'Connect', live: true,  color: '#7c3aed' },
+  { name: 'Theme',   live: true,  color: '#0891b2' },
+  { name: 'Lipr',    live: true,  color: '#059669' },
+  { name: 'Meet',    live: false, color: '#d97706' },
+  { name: 'Finance', live: false, color: '#be185d' },
+  { name: 'Task',    live: false, color: '#0d9488' },
+  { name: 'Archive', live: false, color: '#7c3aed' },
+]
+
+// Headline split for word-by-word animation
+const headlineWords = [
+  { text: 'نبني',    gradient: false },
+  { text: 'أنظمة',  gradient: false },
+  { text: 'تدير',   gradient: false },
+  { text: 'شركتك',  gradient: true  },
+  { text: 'بالكامل', gradient: false },
 ]
 
 export default function Hero() {
@@ -57,18 +66,30 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
-              {...fadeUp(0.1)}
-              className="text-[2.1rem] sm:text-[2.7rem] lg:text-[3rem] font-bold leading-[1.18] tracking-[-0.02em] mb-5"
-              style={{ fontFamily: 'Cairo' }}
+            {/* Animated headline — word by word */}
+            <h1
+              className="text-[2.1rem] sm:text-[2.7rem] lg:text-[3rem] font-bold leading-[1.3] tracking-[-0.02em] mb-5"
+              style={{ fontFamily: 'Cairo', overflow: 'hidden' }}
             >
-              نبني أنظمة إدارة{' '}
-              <span className="gradient-text">تشغّل شركتك</span>{' '}
-              بالكامل
-            </motion.h1>
+              {headlineWords.map((word, i) => (
+                <motion.span
+                  key={word.text}
+                  initial={{ opacity: 0, y: 32, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.15 + i * 0.12,
+                    ease: EASE,
+                  }}
+                  className={`inline-block ml-2 ${word.gradient ? 'gradient-text' : ''}`}
+                >
+                  {word.text}
+                </motion.span>
+              ))}
+            </h1>
 
             <motion.p
-              {...fadeUp(0.2)}
+              {...fadeUp(0.85)}
               className="text-[#7a93bc] text-base leading-[1.9] max-w-[500px] mb-8"
               style={{ fontFamily: 'Cairo' }}
             >
@@ -76,7 +97,7 @@ export default function Hero() {
               ثمانية منتجات متكاملة تُغطي كل احتياجات شركتك، مصمّمة أصلاً للسوق السعودي.
             </motion.p>
 
-            <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-3 mb-12">
+            <motion.div {...fadeUp(1.0)} className="flex flex-wrap gap-3 mb-12">
               <a
                 href="#products"
                 className="inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-7 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 shadow-[0_4px_24px_rgba(37,99,235,0.35)] text-sm"
@@ -95,7 +116,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Social proof */}
-            <motion.div {...fadeUp(0.4)} className="flex items-center gap-4">
+            <motion.div {...fadeUp(1.1)} className="flex items-center gap-4">
               <div className="flex -space-x-2 space-x-reverse">
                 {['م', 'ف', 'خ', 'ع', 'ن'].map((l, i) => (
                   <div
@@ -113,11 +134,11 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Products mockup — 8 product grid */}
+          {/* Products mockup — names only, no icons */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
             className="relative hidden lg:block"
           >
             <div className="relative">
@@ -152,44 +173,56 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Products grid inside mockup */}
+                {/* Products grid — names only */}
                 <div className="p-4" dir="rtl">
-                  <div className="text-[9px] text-[#3d5270] mb-3 font-bold uppercase tracking-wider" style={{ fontFamily: 'Inter' }}>
+                  <div
+                    className="text-[9px] text-[#3d5270] mb-3 font-bold uppercase tracking-[2px]"
+                    style={{ fontFamily: 'Inter' }}
+                  >
                     SMAW Product Suite
                   </div>
-                  <div className="grid grid-cols-4 gap-2.5">
-                    {productIcons.map((p, i) => (
+
+                  <div className="grid grid-cols-4 gap-2">
+                    {products.map((p, i) => (
                       <motion.div
                         key={p.name}
-                        initial={{ opacity: 0, scale: 0.7 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.4 + i * 0.07, duration: 0.4, ease: EASE }}
-                        className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + i * 0.07, duration: 0.35, ease: EASE }}
+                        className="flex flex-col items-center justify-center gap-1.5 py-3 px-2 rounded-xl"
                         style={{
-                          background: p.live ? `${p.color}12` : 'rgba(7,11,20,0.6)',
-                          border: p.live ? `1px solid ${p.color}28` : '1px solid rgba(148,163,184,0.07)',
+                          background: p.live
+                            ? `${p.color}10`
+                            : 'rgba(7,11,20,0.55)',
+                          border: p.live
+                            ? `1px solid ${p.color}25`
+                            : '1px solid rgba(148,163,184,0.07)',
                         }}
                       >
-                        <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center"
-                          style={{ background: `${p.color}20`, color: p.color, opacity: p.live ? 1 : 0.5 }}
-                        >
-                          <i className={`${p.icon} text-xs`} />
-                        </div>
                         <span
-                          className="text-[8px] font-bold text-center"
-                          style={{ fontFamily: 'Inter', color: p.live ? '#e2e8f8' : '#3d5270' }}
+                          className="text-[11px] font-bold leading-none"
+                          style={{
+                            fontFamily: 'Inter',
+                            color: p.live ? '#e2e8f8' : '#3d5270',
+                            letterSpacing: '-0.01em',
+                          }}
                         >
                           {p.name}
                         </span>
-                        {p.live && (
-                          <span className="w-1 h-1 rounded-full bg-[#10b981]" />
-                        )}
+                        <span
+                          className="text-[8px] font-semibold uppercase tracking-wider"
+                          style={{
+                            fontFamily: 'Inter',
+                            color: p.live ? '#10b981' : '#f59e0b',
+                          }}
+                        >
+                          {p.live ? 'Live' : 'Soon'}
+                        </span>
                       </motion.div>
                     ))}
                   </div>
 
-                  {/* Mini stats bar */}
+                  {/* Mini stats */}
                   <div className="mt-3 grid grid-cols-3 gap-2">
                     {[
                       { v: '4', l: 'منتجات نشطة', c: '#10b981' },
@@ -208,26 +241,6 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-4 right-8 glass rounded-xl px-3 py-2 flex items-center gap-2 text-xs font-semibold shadow-xl"
-                style={{ fontFamily: 'Cairo' }}
-              >
-                <i className="fas fa-check-circle text-[#10b981] text-sm" />
-                رؤية 2030 متوافق
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -top-4 left-4 glass rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl"
-              >
-                <i className="fas fa-robot text-[#60a5fa] text-sm" />
-                <span className="text-[10px] text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>AI مدمج في كل منتج</span>
-              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -236,7 +249,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
+          transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
           className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden border border-[rgba(148,163,184,0.08)]"
           style={{ background: 'rgba(148,163,184,0.06)' }}
         >
