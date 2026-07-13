@@ -118,7 +118,7 @@ export const products: Product[] = [
     id: 'lipr',
     name: 'SMAW Lipr',
     tagline: 'صانع الأوامر الذكي ومكتبة أدوات AI العربية',
-    icon: 'fas fa-robot',
+    icon: 'fab fa-chrome',
     color: '#2563eb',
     status: 'live',
     problem:

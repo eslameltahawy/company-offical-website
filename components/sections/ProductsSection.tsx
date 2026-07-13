@@ -51,16 +51,24 @@ function ProductCard({
         el.style.opacity = isLive ? '1' : '0.72'
       }}
     >
-      {/* Status badge */}
-      <div className="flex items-center justify-between mb-4">
-        <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: `${product.color}18`, color: product.color }}
-        >
-          <i className={`${product.icon} text-base`} />
+      {/* Icon + Name + Badge — all on one line */}
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{ background: `${product.color}18`, color: product.color }}
+          >
+            <i className={`${product.icon} text-sm`} />
+          </div>
+          <h3
+            className="text-sm font-bold text-[#e2e8f8] group-hover:text-white transition-colors truncate"
+            style={{ fontFamily: 'Cairo' }}
+          >
+            {product.name}
+          </h3>
         </div>
         <span
-          className="text-[10px] font-bold px-2 py-1 rounded-full"
+          className="text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0"
           style={{
             fontFamily: 'Cairo',
             background: isLive ? 'rgba(37,99,235,0.12)' : 'rgba(148,163,184,0.07)',
@@ -72,18 +80,10 @@ function ProductCard({
         </span>
       </div>
 
-      {/* Name & tagline */}
-      <div className="mb-4">
-        <h3
-          className="text-base font-bold text-[#e2e8f8] mb-1 group-hover:text-white transition-colors"
-          style={{ fontFamily: 'Cairo' }}
-        >
-          {product.name}
-        </h3>
-        <p className="text-xs text-[#7a93bc] leading-relaxed" style={{ fontFamily: 'Cairo' }}>
-          {product.tagline}
-        </p>
-      </div>
+      {/* Tagline */}
+      <p className="text-xs text-[#7a93bc] leading-relaxed mb-4" style={{ fontFamily: 'Cairo' }}>
+        {product.tagline}
+      </p>
 
       {/* Top 3 solution bullets */}
       <ul className="space-y-1.5 mb-4">
