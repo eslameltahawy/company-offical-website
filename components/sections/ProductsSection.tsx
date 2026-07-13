@@ -80,8 +80,8 @@ function ProductCard({
         </span>
       </div>
 
-      {/* Tagline */}
-      <p className="text-xs text-[#7a93bc] leading-relaxed mb-4" style={{ fontFamily: 'Cairo' }}>
+      {/* Tagline — fixed min-height so bullets start at same position across all cards */}
+      <p className="text-xs text-[#7a93bc] leading-relaxed mb-4" style={{ fontFamily: 'Cairo', minHeight: '2.5rem' }}>
         {product.tagline}
       </p>
 

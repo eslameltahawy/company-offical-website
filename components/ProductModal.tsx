@@ -175,6 +175,34 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 </ul>
               </div>
 
+              {/* Install Steps — browser extensions only */}
+              {product.installSteps && (
+                <div
+                  className="rounded-xl p-4"
+                  style={{ background: 'rgba(37,99,235,0.04)', border: '1px solid rgba(37,99,235,0.15)' }}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <i className="fab fa-chrome text-[#60a5fa] text-sm" />
+                    <span className="text-xs font-bold text-[#60a5fa]" style={{ fontFamily: 'Cairo' }}>
+                      خطوات التثبيت على Chrome — سهلة ومجانية 100%
+                    </span>
+                  </div>
+                  <ol className="space-y-2.5">
+                    {product.installSteps.map((step, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
+                        <span
+                          className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
+                          style={{ background: 'rgba(37,99,235,0.25)', color: '#60a5fa', border: '1px solid rgba(37,99,235,0.4)' }}
+                        >
+                          {i + 1}
+                        </span>
+                        <span className="leading-relaxed">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+
               {/* Audience */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
@@ -208,6 +236,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
             >
               {product.status === 'live' ? (
                 <>
+                  {/* PDF / Guide download */}
                   {product.pdfPath && (
                     <a
                       href={product.pdfPath}
@@ -221,22 +250,40 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                       }}
                     >
                       <i className="fas fa-file-download text-xs" />
-                      تحميل الملف التعريفي
+                      {product.downloadZipUrl ? 'دليل المنتج PDF' : 'تحميل الملف التعريفي'}
                     </a>
                   )}
-                  <a
-                    href="#booking"
-                    onClick={onClose}
-                    className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold py-2.5 rounded-xl text-white transition-all hover:opacity-90 hover:-translate-y-0.5"
-                    style={{
-                      fontFamily: 'Cairo',
-                      background: product.color,
-                      boxShadow: `0 4px 20px ${product.color}40`,
-                    }}
-                  >
-                    <i className="fas fa-calendar-alt text-xs" />
-                    احجز اجتماعاً لطلب الخدمة
-                  </a>
+
+                  {/* Primary CTA: download zip (extensions) OR book a meeting */}
+                  {product.downloadZipUrl ? (
+                    <a
+                      href={product.downloadZipUrl}
+                      download
+                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold py-2.5 rounded-xl text-white transition-all hover:opacity-90 hover:-translate-y-0.5"
+                      style={{
+                        fontFamily: 'Cairo',
+                        background: '#2563eb',
+                        boxShadow: '0 4px 20px rgba(37,99,235,0.4)',
+                      }}
+                    >
+                      <i className="fab fa-chrome text-xs" />
+                      حمّل الإضافة مجاناً
+                    </a>
+                  ) : (
+                    <a
+                      href="#booking"
+                      onClick={onClose}
+                      className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold py-2.5 rounded-xl text-white transition-all hover:opacity-90 hover:-translate-y-0.5"
+                      style={{
+                        fontFamily: 'Cairo',
+                        background: product.color,
+                        boxShadow: `0 4px 20px ${product.color}40`,
+                      }}
+                    >
+                      <i className="fas fa-calendar-alt text-xs" />
+                      احجز اجتماعاً لطلب الخدمة
+                    </a>
+                  )}
                 </>
               ) : (
                 <>
@@ -244,9 +291,9 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     className="flex-1 flex items-center justify-center gap-2 text-xs py-2.5 rounded-xl"
                     style={{
                       fontFamily: 'Cairo',
-                      background: 'rgba(245,158,11,0.08)',
-                      border: '1px solid rgba(245,158,11,0.2)',
-                      color: '#f59e0b',
+                      background: 'rgba(37,99,235,0.08)',
+                      border: '1px solid rgba(37,99,235,0.2)',
+                      color: '#60a5fa',
                     }}
                   >
                     <i className="fas fa-clock text-xs" />
@@ -258,8 +305,8 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold py-2.5 rounded-xl text-white transition-all hover:opacity-90"
                     style={{
                       fontFamily: 'Cairo',
-                      background: 'rgba(148,163,184,0.1)',
-                      border: '1px solid rgba(148,163,184,0.2)',
+                      background: 'rgba(37,99,235,0.15)',
+                      border: '1px solid rgba(37,99,235,0.25)',
                       color: '#e2e8f8',
                     }}
                   >
