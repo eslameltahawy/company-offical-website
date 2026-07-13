@@ -27,11 +27,15 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className={`fixed top-0 left-0 right-0 z-50 h-[68px] transition-all duration-300 ${
-          scrolled
-            ? 'glass-strong shadow-[0_1px_24px_rgba(0,0,0,0.5)]'
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 h-[68px]"
+        style={{
+          background: scrolled ? 'rgba(10,16,32,0.88)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(28px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(28px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(148,163,184,0.07)' : 'none',
+          boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.35)' : 'none',
+          transition: 'background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease',
+        }}
       >
         <div className="container-smaw h-full flex items-center justify-between gap-4">
 
