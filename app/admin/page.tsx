@@ -14,8 +14,23 @@ interface Booking {
   slotId?: string
   slotLabel?: string
   calendarLink?: string
+  meetLink?: string
+  gcalEventId?: string
   createdAt: string
   method: string
+}
+
+interface GcalStatus {
+  configured: boolean
+  hasClientId: boolean
+  hasClientSecret: boolean
+  hasRefreshToken: boolean
+  hasCalendarId: boolean
+  hasSlackWebhook: boolean
+  hasSmtp: boolean
+  storageMode: 'kv' | 'fs'
+  hasKV: boolean
+  authUrl: string | null
 }
 
 interface SlotItem {
@@ -41,13 +56,36 @@ function isToday(iso: string) {
 
 const STAT_COLOR = '#2563eb'
 
+function StatusRow({ label, ok, okText, failText, helpUrl, helpLabel }: {
+  label: string; ok: boolean; okText: string; failText: string; helpUrl?: string; helpLabel?: string
+}) {
+  return (
+    <div className="flex items-start justify-between gap-3 py-2.5 px-3 rounded-lg" style={{
+      background: ok ? 'rgba(37,99,235,0.06)' : 'rgba(251,191,36,0.06)',
+      border: `1px solid ${ok ? 'rgba(37,99,235,0.18)' : 'rgba(251,191,36,0.18)'}`,
+    }}>
+      <div>
+        <p className="text-[11px] font-mono font-bold" style={{ color: ok ? '#60a5fa' : '#fbbf24' }}>{label}</p>
+        <p className="text-[10px] mt-0.5" style={{ color: ok ? '#7a93bc' : '#d97706' }}>
+          {ok ? okText : failText}
+          {!ok && helpUrl && (
+            <> — <a href={helpUrl} target="_blank" className="underline" style={{ color: '#fbbf24' }}>{helpLabel}</a></>
+          )}
+        </p>
+      </div>
+      <span className="text-sm flex-shrink-0">{ok ? '✅' : '⚠️'}</span>
+    </div>
+  )
+}
+
 /* ── Admin Page ─────────────────────────────────────────────────────────── */
 
 export default function AdminPage() {
   const [pw, setPw]               = useState('')
   const [authed, setAuthed]       = useState(false)
   const [authError, setAuthError] = useState(false)
-  const [tab, setTab]             = useState<'bookings' | 'slots'>('bookings')
+  const [tab, setTab]             = useState<'bookings' | 'slots' | 'google'>('bookings')
+  const [gcalStatus, setGcalStatus] = useState<GcalStatus | null>(null)
 
   /* bookings */
   const [bookings, setBookings]   = useState<Booking[]>([])
@@ -80,6 +118,14 @@ export default function AdminPage() {
     setBLoading(false)
   }, [])
 
+  const fetchGcalStatus = useCallback(async (password: string) => {
+    try {
+      const res = await fetch(`/api/admin/google-status?pw=${encodeURIComponent(password)}`)
+      if (!res.ok) return
+      setGcalStatus(await res.json())
+    } catch { /* ignore */ }
+  }, [])
+
   const fetchSlots = useCallback(async (password: string) => {
     setSLoading(true)
     try {
@@ -103,6 +149,14 @@ export default function AdminPage() {
     setLastRefresh(new Date())
     setAuthed(true)
     fetchSlots(pw)
+    fetchGcalStatus(pw)
+
+    // Handle Google OAuth callback result in URL
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('gcal') === 'success') {
+      setTab('google')
+      window.history.replaceState({}, '', '/admin')
+    }
   }
 
   /* Auto-refresh */
@@ -179,6 +233,19 @@ export default function AdminPage() {
     setSlots((prev) => prev.filter((s) => s.id !== id))
     setDeletingSlot(null)
   }
+
+  // Read Google OAuth result from URL on mount (client-only)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('gcal') === 'success') {
+      const rt = params.get('rt')
+      if (rt) {
+        setGcalStatus((prev) => prev ? { ...prev, hasRefreshToken: true, configured: prev.hasClientId && prev.hasClientSecret } : null)
+      }
+      window.history.replaceState({}, '', '/admin')
+    }
+  }, [])
 
   const todayCount = bookings.filter((b) => isToday(b.createdAt)).length
   const bookedSlots = slots.filter((s) => s.booked).length
@@ -303,29 +370,42 @@ export default function AdminPage() {
         </div>
 
         {/* ── Tabs ── */}
-        <div className="flex gap-2 mb-6">
-          {[
-            { id: 'bookings', label: 'الحجوزات', icon: 'fas fa-calendar-check', count: bookings.length },
-            { id: 'slots',    label: 'المواعيد المتاحة', icon: 'fas fa-calendar-plus', count: slots.length },
-          ].map((t) => (
-            <button
-              key={t.id}
-              onClick={() => { setTab(t.id as 'bookings' | 'slots'); if (t.id === 'slots') fetchSlots(pw) }}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
-              style={{
-                background: tab === t.id ? '#2563eb' : 'rgba(13,21,37,0.8)',
-                border: `1px solid ${tab === t.id ? '#2563eb' : 'rgba(148,163,184,0.1)'}`,
-                color: tab === t.id ? '#fff' : '#7a93bc',
-              }}
-            >
-              <i className={`${t.icon} text-xs`} />
-              {t.label}
-              <span className="text-[10px] px-1.5 rounded-full" style={{
-                background: tab === t.id ? 'rgba(255,255,255,0.2)' : 'rgba(148,163,184,0.1)',
-                color: tab === t.id ? '#fff' : '#3d5270',
-              }}>{t.count}</span>
-            </button>
-          ))}
+        <div className="flex flex-wrap gap-2 mb-6 items-center justify-between">
+          <div className="flex gap-2">
+            {([
+              { id: 'bookings', label: 'الحجوزات',        icon: 'fas fa-calendar-check', badge: String(bookings.length) },
+              { id: 'slots',    label: 'المواعيد المتاحة', icon: 'fas fa-calendar-plus',  badge: String(slots.length) },
+              { id: 'google',   label: 'إعداد Google',     icon: 'fab fa-google',          badge: gcalStatus?.configured ? '✓' : '!' },
+            ] as const).map((t) => (
+              <button
+                key={t.id}
+                onClick={() => {
+                  setTab(t.id)
+                  if (t.id === 'slots') fetchSlots(pw)
+                  if (t.id === 'google') fetchGcalStatus(pw)
+                }}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                style={{
+                  background: tab === t.id ? '#2563eb' : 'rgba(13,21,37,0.8)',
+                  border: `1px solid ${tab === t.id ? '#2563eb' : t.id === 'google' && !gcalStatus?.configured ? 'rgba(251,191,36,0.4)' : 'rgba(148,163,184,0.1)'}`,
+                  color: tab === t.id ? '#fff' : t.id === 'google' && !gcalStatus?.configured ? '#fbbf24' : '#7a93bc',
+                }}
+              >
+                <i className={`${t.icon} text-xs`} />
+                {t.label}
+                <span className="text-[10px] px-1.5 rounded-full" style={{
+                  background: tab === t.id ? 'rgba(255,255,255,0.2)' : 'rgba(148,163,184,0.1)',
+                  color: tab === t.id ? '#fff' : '#3d5270',
+                }}>{t.badge}</span>
+              </button>
+            ))}
+          </div>
+          {gcalStatus && (
+            <div className="flex items-center gap-2 text-[10px]" style={{ color: '#3d5270' }}>
+              <span className={`w-2 h-2 rounded-full`} style={{ background: gcalStatus.hasKV ? '#22c55e' : '#f59e0b' }} />
+              التخزين: {gcalStatus.storageMode === 'kv' ? 'Vercel KV ✓' : 'ملف (محلي فقط)'}
+            </div>
+          )}
         </div>
 
         {/* ────────────────────────────────────────── */}
@@ -385,15 +465,24 @@ export default function AdminPage() {
                           <td className="px-4 py-3" style={{ color: '#7a93bc', whiteSpace: 'nowrap' }}>{b.company}</td>
                           <td className="px-4 py-3" style={{ whiteSpace: 'nowrap' }}>
                             {b.slotLabel ? (
-                              <div className="flex items-center gap-1.5">
+                              <div className="flex flex-col gap-1">
                                 <span style={{ color: '#60a5fa', fontFamily: 'Cairo' }}>{b.slotLabel}</span>
-                                {b.calendarLink && (
-                                  <a href={b.calendarLink} target="_blank" rel="noopener noreferrer" title="أضف للتقويم"
-                                    className="inline-flex items-center justify-center w-5 h-5 rounded"
-                                    style={{ background: 'rgba(37,99,235,0.12)', color: '#60a5fa' }}>
-                                    <i className="fas fa-calendar-plus text-[8px]" />
-                                  </a>
-                                )}
+                                <div className="flex items-center gap-1.5">
+                                  {b.meetLink && (
+                                    <a href={b.meetLink} target="_blank" rel="noopener noreferrer" title="Google Meet"
+                                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold"
+                                      style={{ background: 'rgba(37,99,235,0.15)', color: '#60a5fa', border: '1px solid rgba(37,99,235,0.3)' }}>
+                                      <i className="fas fa-video text-[8px]" /> Meet
+                                    </a>
+                                  )}
+                                  {b.calendarLink && (
+                                    <a href={b.calendarLink} target="_blank" rel="noopener noreferrer" title="أضف للتقويم"
+                                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold"
+                                      style={{ background: 'rgba(96,165,250,0.1)', color: '#93c5fd', border: '1px solid rgba(96,165,250,0.2)' }}>
+                                      <i className="fas fa-calendar-plus text-[8px]" /> تقويم
+                                    </a>
+                                  )}
+                                </div>
                               </div>
                             ) : (
                               <span style={{ color: '#3d5270' }}>—</span>
@@ -556,6 +645,137 @@ export default function AdminPage() {
                     </div>
                   ))}
                 </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ────────────────────────────────────────── */}
+        {/* TAB: GOOGLE SETUP                         */}
+        {/* ────────────────────────────────────────── */}
+        {tab === 'google' && (
+          <div className="max-w-2xl mx-auto space-y-4">
+            {/* Storage card */}
+            <div className="rounded-2xl p-6" style={card}>
+              <h3 className="text-sm font-bold text-[#e2e8f8] mb-4 flex items-center gap-2">
+                <i className="fas fa-database text-[#2563eb]" /> التخزين
+              </h3>
+              {gcalStatus ? (
+                <div className="space-y-3">
+                  <StatusRow label="Vercel KV (Redis)" ok={gcalStatus.hasKV}
+                    okText="متصل — الحجوزات تُحفظ بشكل دائم ✓"
+                    failText="غير متصل — الحجوزات تُفقد بعد إعادة النشر"
+                    helpUrl="https://vercel.com/dashboard/stores"
+                    helpLabel="أنشئ KV Store في Vercel"
+                  />
+                  {!gcalStatus.hasKV && (
+                    <div className="rounded-xl p-4 text-xs leading-relaxed space-y-1" style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', color: '#fbbf24' }}>
+                      <p className="font-bold">⚠️ لحل مشكلة الحجوزات على Vercel:</p>
+                      <ol className="list-decimal list-inside space-y-1 text-[11px]" style={{ color: '#d97706' }}>
+                        <li>افتح <a href="https://vercel.com/dashboard/stores" target="_blank" className="underline" style={{ color: '#fbbf24' }}>Vercel → Storage</a></li>
+                        <li>اضغط "Create Database" → اختر "KV"</li>
+                        <li>سمّه أي اسم → اضغط "Connect to Project"</li>
+                        <li>أعد النشر (Redeploy) — الحجوزات ستُحفظ تلقائياً</li>
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm" style={{ color: '#3d5270' }}>جارٍ التحميل...</p>
+              )}
+            </div>
+
+            {/* Notifications card */}
+            <div className="rounded-2xl p-6" style={card}>
+              <h3 className="text-sm font-bold text-[#e2e8f8] mb-4 flex items-center gap-2">
+                <i className="fas fa-bell text-[#2563eb]" /> الإشعارات
+              </h3>
+              {gcalStatus ? (
+                <div className="space-y-3">
+                  <StatusRow label="Slack Webhook" ok={gcalStatus.hasSlackWebhook}
+                    okText="متصل — الإشعارات تُرسل لـ Slack ✓"
+                    failText="غير مضبوط — أضف SLACK_WEBHOOK_URL"
+                    helpUrl="https://api.slack.com/messaging/webhooks"
+                    helpLabel="أنشئ Webhook في Slack"
+                  />
+                  <StatusRow label="SMTP (Email للعميل)" ok={gcalStatus.hasSmtp}
+                    okText="مضبوط — إيميل التأكيد يُرسل للعميل ✓"
+                    failText="غير مضبوط — أضف SMTP_HOST / SMTP_USER / SMTP_PASS"
+                  />
+                  {!gcalStatus.hasSlackWebhook && (
+                    <div className="rounded-xl p-4 text-xs" style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', color: '#fbbf24' }}>
+                      <p className="font-bold mb-2">خطوات إعداد Slack Webhook:</p>
+                      <ol className="list-decimal list-inside space-y-1 text-[11px]" style={{ color: '#d97706' }}>
+                        <li>افتح <a href="https://api.slack.com/apps" target="_blank" className="underline" style={{ color: '#fbbf24' }}>api.slack.com/apps</a> → Create App → From Scratch</li>
+                        <li>Incoming Webhooks → Activate → Add New Webhook → اختر القناة</li>
+                        <li>انسخ الـ Webhook URL</li>
+                        <li>أضفه في Vercel → Settings → Environment Variables بالاسم: <code className="px-1 rounded" style={{ background: 'rgba(37,99,235,0.2)' }}>SLACK_WEBHOOK_URL</code></li>
+                        <li>أعد النشر</li>
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm" style={{ color: '#3d5270' }}>جارٍ التحميل...</p>
+              )}
+            </div>
+
+            {/* Google Calendar card */}
+            <div className="rounded-2xl p-6" style={card}>
+              <h3 className="text-sm font-bold text-[#e2e8f8] mb-1 flex items-center gap-2">
+                <i className="fab fa-google text-[#2563eb]" /> Google Calendar + Meet
+              </h3>
+              <p className="text-[11px] mb-4" style={{ color: '#3d5270' }}>
+                عند الضبط الكامل، كل حجز جديد سيُنشئ تلقائياً حدثاً في Google Calendar
+                مع رابط Google Meet، وسيُرسل دعوة للعميل مباشرةً على إيميله.
+              </p>
+              {gcalStatus ? (
+                <div className="space-y-3">
+                  <StatusRow label="GOOGLE_CLIENT_ID"     ok={gcalStatus.hasClientId}     okText="موجود ✓" failText="مفقود" />
+                  <StatusRow label="GOOGLE_CLIENT_SECRET" ok={gcalStatus.hasClientSecret} okText="موجود ✓" failText="مفقود" />
+                  <StatusRow label="GOOGLE_REFRESH_TOKEN" ok={gcalStatus.hasRefreshToken} okText="موجود — Google Calendar جاهز ✓" failText="مفقود — اضغط الزر أدناه للحصول عليه" />
+                  <StatusRow label="GOOGLE_CALENDAR_ID"   ok={gcalStatus.hasCalendarId}   okText="موجود ✓" failText="مفقود — أضف بريدك الإلكتروني" />
+
+                  {gcalStatus.configured ? (
+                    <div className="rounded-xl p-4 text-sm text-center font-semibold" style={{ background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.3)', color: '#60a5fa' }}>
+                      <i className="fas fa-check-circle me-2" />
+                      Google Calendar + Meet مُفعَّل بالكامل ✓
+                    </div>
+                  ) : (
+                    <>
+                      {!gcalStatus.hasClientId || !gcalStatus.hasClientSecret ? (
+                        <div className="rounded-xl p-4 text-xs leading-relaxed space-y-2" style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', color: '#d97706' }}>
+                          <p className="font-bold text-[#fbbf24]">خطوات الإعداد أولاً (مرة واحدة):</p>
+                          <ol className="list-decimal list-inside space-y-1">
+                            <li>افتح <a href="https://console.cloud.google.com" target="_blank" className="underline text-[#fbbf24]">console.cloud.google.com</a> → أنشئ مشروعاً جديداً</li>
+                            <li>APIs & Services → Enable APIs → ابحث عن "Google Calendar API" → Enable</li>
+                            <li>Credentials → Create Credentials → OAuth 2.0 Client ID → Web Application</li>
+                            <li>Authorized redirect URIs: <code className="px-1 rounded bg-white/10">{`${typeof window !== 'undefined' ? window.location.origin : 'https://smaww.com'}/api/admin/google-callback`}</code></li>
+                            <li>انسخ Client ID و Client Secret → أضفهم في Vercel env vars</li>
+                            <li>أضف أيضاً: <code className="px-1 rounded bg-white/10">GOOGLE_CALENDAR_ID</code> = بريدك الإلكتروني</li>
+                            <li>أضف أيضاً: <code className="px-1 rounded bg-white/10">NEXT_PUBLIC_BASE_URL</code> = رابط موقعك (بدون /)</li>
+                            <li>أعد النشر → ارجع هنا واضغط "ربط Google Calendar"</li>
+                          </ol>
+                        </div>
+                      ) : gcalStatus.authUrl ? (
+                        <a
+                          href={gcalStatus.authUrl}
+                          className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white transition-all hover:-translate-y-0.5"
+                          style={{ background: '#2563eb', boxShadow: '0 4px 20px rgba(37,99,235,0.4)' }}
+                        >
+                          <i className="fab fa-google" />
+                          ربط Google Calendar (اضغط مرة واحدة)
+                        </a>
+                      ) : (
+                        <p className="text-xs text-center" style={{ color: '#f87171' }}>
+                          أضف NEXT_PUBLIC_BASE_URL في env vars أولاً
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm" style={{ color: '#3d5270' }}>جارٍ التحميل...</p>
               )}
             </div>
           </div>
