@@ -17,7 +17,7 @@ interface SlotInfo {
 type Field = { name: string; phone: string; email: string; company: string; message: string }
 type Errors = Partial<Record<keyof Field, string>>
 
-const PHONE_RE = /^(\+9665|05)[0-9]{8}$/
+const PHONE_RE = /^\+?[0-9\s\-().]{7,20}$/
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 const AR_DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت']
@@ -33,8 +33,8 @@ function validate(f: Field): Errors {
     e.phone = 'أدخل رقم الجوال أو البريد الإلكتروني'
     e.email = 'أدخل رقم الجوال أو البريد الإلكتروني'
   } else {
-    if (hasPhone && !PHONE_RE.test(f.phone.trim().replace(/\s/g, '')))
-      e.phone = 'رقم الجوال غير صحيح (مثال: 0512345678)'
+    if (hasPhone && !PHONE_RE.test(f.phone.trim()))
+      e.phone = 'رقم الجوال غير صحيح (مثال: +201012345678)'
     if (hasEmail && !EMAIL_RE.test(f.email.trim()))
       e.email = 'صيغة البريد الإلكتروني غير صحيحة'
   }
@@ -398,7 +398,7 @@ export default function BookingCTA() {
                             الجوال
                           </label>
                           <input type="tel" name="phone" value={fields.phone} onChange={onChange}
-                            placeholder="0512345678" className={inputCls('phone')}
+                            placeholder="+201012345678" className={inputCls('phone')}
                             style={{ fontFamily: 'Cairo', direction: 'ltr', textAlign: 'left' }} />
                           {errors.phone && <p className="text-xs text-red-400 mt-1" style={{ fontFamily: 'Cairo' }}>{errors.phone}</p>}
                         </div>

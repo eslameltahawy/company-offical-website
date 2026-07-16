@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import { availableSlots as defaultSlots, formatSlotLabel, type Slot } from '@/data/availableSlots'
+import { getBookings } from '@/lib/storage'
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'smaw2026'
 const CUSTOM_SLOTS_FILE = path.join(process.cwd(), 'data', 'customSlots.json')
-const BOOKINGS_FILE = path.join(process.cwd(), 'data', 'bookings.json')
 
 function readCustomSlots(): Slot[] {
   try { return JSON.parse(fs.readFileSync(CUSTOM_SLOTS_FILE, 'utf-8')) } catch { return [] }
@@ -13,10 +13,6 @@ function readCustomSlots(): Slot[] {
 
 function writeCustomSlots(slots: Slot[]) {
   try { fs.writeFileSync(CUSTOM_SLOTS_FILE, JSON.stringify(slots, null, 2), 'utf-8') } catch { /* Vercel */ }
-}
-
-function readBookings(): { slotId?: string }[] {
-  try { return JSON.parse(fs.readFileSync(BOOKINGS_FILE, 'utf-8')) } catch { return [] }
 }
 
 /** Merge default + custom slots, deduplicating by id */
@@ -32,7 +28,7 @@ export async function GET(req: NextRequest) {
   const pw = req.nextUrl.searchParams.get('pw')
   if (pw !== ADMIN_PASSWORD) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
-  const bookings = readBookings()
+  const bookings = await getBookings()
   const bookedIds = new Set(bookings.map((b) => b.slotId).filter(Boolean))
 
   const slots = allSlots().map((s) => ({
