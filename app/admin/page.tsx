@@ -714,23 +714,26 @@ export default function AdminPage() {
                     helpUrl="https://api.slack.com/messaging/webhooks"
                     helpLabel="أنشئ Webhook في Slack"
                   />
-                  {gcalStatus.hasSlackWebhook && (
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={testSlack}
-                        disabled={slackTesting}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all disabled:opacity-50"
-                        style={{ background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', color: '#60a5fa' }}
-                      >
-                        {slackTesting ? <><i className="fas fa-spinner fa-spin text-[10px]" /> جارٍ الاختبار...</> : <><i className="fab fa-slack text-[10px]" /> اختبر Slack الآن</>}
-                      </button>
-                      {slackTestResult && (
-                        <span className="text-[11px] font-semibold" style={{ color: slackTestResult.ok ? '#22c55e' : '#f87171' }}>
-                          {slackTestResult.msg}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <button
+                      onClick={testSlack}
+                      disabled={slackTesting}
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all disabled:opacity-50"
+                      style={{ background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', color: '#60a5fa' }}
+                    >
+                      {slackTesting ? <><i className="fas fa-spinner fa-spin text-[10px]" /> جارٍ الاختبار...</> : <><i className="fab fa-slack text-[10px]" /> اختبر Slack الآن</>}
+                    </button>
+                    {slackTestResult && (
+                      <span className="text-[11px] font-semibold" style={{ color: slackTestResult.ok ? '#22c55e' : '#f87171' }}>
+                        {slackTestResult.msg}
+                      </span>
+                    )}
+                    {!gcalStatus.hasSlackWebhook && (
+                      <span className="text-[10px]" style={{ color: '#d97706' }}>
+                        ⚠️ أضف SLACK_WEBHOOK_URL في Vercel ثم أعد النشر
+                      </span>
+                    )}
+                  </div>
                   <StatusRow label="SMTP (Email للعميل)" ok={gcalStatus.hasSmtp}
                     okText="مضبوط — إيميل التأكيد يُرسل للعميل ✓"
                     failText="غير مضبوط — أضف SMTP_HOST / SMTP_USER / SMTP_PASS"
