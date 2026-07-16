@@ -474,7 +474,7 @@ export default function AdminPage() {
                             {isToday(b.createdAt) && (
                               <span className="mr-2 px-1.5 py-0.5 rounded-full text-[9px] font-bold"
                                 style={{ background: 'rgba(37,99,235,0.15)', color: '#60a5fa', border: '1px solid rgba(37,99,235,0.3)' }}>
-                                اليوم
+                                جديد
                               </span>
                             )}
                           </td>

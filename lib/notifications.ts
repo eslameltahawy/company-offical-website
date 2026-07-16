@@ -31,34 +31,22 @@ export async function sendSlackNotification(
   }
 
   const slotText = booking.slotLabel || 'لم يُحدَّد موعد'
-  const meetText = meetLink ? `\n🎥 *Google Meet:* ${meetLink}` : ''
 
-  const payload = {
-    blocks: [
-      {
-        type: 'header',
-        text: { type: 'plain_text', text: '📅 حجز اجتماع جديد — SMAW', emoji: true },
-      },
-      {
-        type: 'section',
-        fields: [
-          { type: 'mrkdwn', text: `*الاسم:*\n${booking.name}` },
-          { type: 'mrkdwn', text: `*الشركة:*\n${booking.company}` },
-          { type: 'mrkdwn', text: `*الجوال:*\n${booking.phone || '—'}` },
-          { type: 'mrkdwn', text: `*الإيميل:*\n${booking.email || '—'}` },
-          { type: 'mrkdwn', text: `*الموعد:*\n${slotText}${meetText}` },
-        ],
-      },
-      ...(booking.message ? [{
-        type: 'section',
-        text: { type: 'mrkdwn', text: `*الرسالة:*\n${booking.message}` },
-      }] : []),
-      {
-        type: 'context',
-        elements: [{ type: 'mrkdwn', text: `Booking ID: \`${booking.id}\`` }],
-      },
-    ],
-  }
+  const lines = [
+    `📅 *حجز اجتماع جديد — SMAW*`,
+    ``,
+    `👤 *الاسم:* ${booking.name}`,
+    `🏢 *الشركة:* ${booking.company}`,
+    `📞 *الجوال:* ${booking.phone || '—'}`,
+    `📧 *الإيميل:* ${booking.email || '—'}`,
+    `🗓️ *الموعد:* ${slotText}`,
+    ...(meetLink ? [`🎥 *Google Meet:* ${meetLink}`] : []),
+    ...(booking.message ? [`💬 *الرسالة:* ${booking.message}`] : []),
+    ``,
+    `_ID: ${booking.id}_`,
+  ]
+
+  const payload = { text: lines.join('\n') }
 
   try {
     const res = await fetch(webhookUrl, {

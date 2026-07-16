@@ -36,10 +36,12 @@ export async function POST(req: NextRequest) {
     const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: '✅ اختبار من لوحة أدمن SMAW — الإشعارات تعمل بشكل صحيح!' }),
+      body: JSON.stringify({
+        text: `✅ اختبار ناجح من لوحة أدمن SMAW\n🕐 ${new Date().toLocaleString('ar-SA')}\nSlack متصل وجاهز لاستقبال إشعارات الحجوزات!`,
+      }),
     })
     const text = await res.text()
-    return NextResponse.json({ ok: res.ok, status: res.status, response: text })
+    return NextResponse.json({ ok: res.ok, status: res.status, response: text, webhookConfigured: true })
   } catch (err) {
     return NextResponse.json({ ok: false, error: String(err) })
   }
