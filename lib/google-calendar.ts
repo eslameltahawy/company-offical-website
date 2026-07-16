@@ -119,7 +119,6 @@ export async function createCalendarEvent(
       ],
     },
     guestsCanModify: false,
-    sendUpdates: 'all',
   }
 
   try {
@@ -127,6 +126,7 @@ export async function createCalendarEvent(
       calendarId,
       conferenceDataVersion: 1,
       sendNotifications: true,
+      sendUpdates: 'all',
       requestBody: event,
     })
 
