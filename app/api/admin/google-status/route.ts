@@ -23,3 +23,24 @@ export async function GET(req: NextRequest) {
     authUrl,
   })
 }
+
+/** POST — test Slack webhook */
+export async function POST(req: NextRequest) {
+  const pw = req.nextUrl.searchParams.get('pw')
+  if (pw !== ADMIN_PASSWORD) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL
+  if (!webhookUrl) return NextResponse.json({ ok: false, error: 'SLACK_WEBHOOK_URL not set' })
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: '✅ اختبار من لوحة أدمن SMAW — الإشعارات تعمل بشكل صحيح!' }),
+    })
+    const text = await res.text()
+    return NextResponse.json({ ok: res.ok, status: res.status, response: text })
+  } catch (err) {
+    return NextResponse.json({ ok: false, error: String(err) })
+  }
+}

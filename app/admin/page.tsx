@@ -94,6 +94,9 @@ export default function AdminPage() {
   const [search, setSearch]       = useState('')
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null)
 
+  const [slackTesting, setSlackTesting] = useState(false)
+  const [slackTestResult, setSlackTestResult] = useState<{ ok: boolean; msg: string } | null>(null)
+
   /* slots */
   const [slots, setSlots]         = useState<SlotItem[]>([])
   const [sLoading, setSLoading]   = useState(false)
@@ -165,6 +168,19 @@ export default function AdminPage() {
     const iv = setInterval(() => { fetchBookings(pw); fetchSlots(pw) }, 30_000)
     return () => clearInterval(iv)
   }, [authed, pw, fetchBookings, fetchSlots])
+
+  async function testSlack() {
+    setSlackTesting(true)
+    setSlackTestResult(null)
+    try {
+      const res = await fetch(`/api/admin/google-status?pw=${encodeURIComponent(pw)}`, { method: 'POST' })
+      const data = await res.json()
+      setSlackTestResult({ ok: data.ok, msg: data.ok ? 'تم إرسال رسالة اختبار ✓' : (data.error || `خطأ: ${data.response}`) })
+    } catch {
+      setSlackTestResult({ ok: false, msg: 'فشل الاتصال' })
+    }
+    setSlackTesting(false)
+  }
 
   /* ── Bookings actions ──────────────────────────────────────────────── */
 
@@ -698,6 +714,23 @@ export default function AdminPage() {
                     helpUrl="https://api.slack.com/messaging/webhooks"
                     helpLabel="أنشئ Webhook في Slack"
                   />
+                  {gcalStatus.hasSlackWebhook && (
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={testSlack}
+                        disabled={slackTesting}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all disabled:opacity-50"
+                        style={{ background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', color: '#60a5fa' }}
+                      >
+                        {slackTesting ? <><i className="fas fa-spinner fa-spin text-[10px]" /> جارٍ الاختبار...</> : <><i className="fab fa-slack text-[10px]" /> اختبر Slack الآن</>}
+                      </button>
+                      {slackTestResult && (
+                        <span className="text-[11px] font-semibold" style={{ color: slackTestResult.ok ? '#22c55e' : '#f87171' }}>
+                          {slackTestResult.msg}
+                        </span>
+                      )}
+                    </div>
+                  )}
                   <StatusRow label="SMTP (Email للعميل)" ok={gcalStatus.hasSmtp}
                     okText="مضبوط — إيميل التأكيد يُرسل للعميل ✓"
                     failText="غير مضبوط — أضف SMTP_HOST / SMTP_USER / SMTP_PASS"

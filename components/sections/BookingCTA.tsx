@@ -291,11 +291,12 @@ export default function BookingCTA() {
                                     }}
                                   >
                                     <span className="block">
-                                      {slot.time.split(':').map(Number).reduce((h, m, i) => i === 0
-                                        ? (h === 0 ? 12 : h > 12 ? h - 12 : h)
-                                        : h, 0) + ':' + slot.time.split(':')[1]}
-                                      {' '}
-                                      {parseInt(slot.time) < 12 ? 'ص' : 'م'}
+                                      {(() => {
+                                        const h = parseInt(slot.time.split(':')[0])
+                                        const m = slot.time.split(':')[1]
+                                        const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
+                                        return `${h12}:${m} ${h < 12 ? 'ص' : 'م'}`
+                                      })()}
                                     </span>
                                     {slot.booked && (
                                       <span className="block text-[10px] mt-0.5" style={{ color: '#3d5270' }}>محجوز</span>
