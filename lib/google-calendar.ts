@@ -118,8 +118,8 @@ export async function createCalendarEvent(
         { method: 'popup', minutes: 30 },
       ],
     },
-    guestsCanModifyEvent: false,
-    sendUpdates: 'all', // sends invite to attendees automatically
+    guestsCanModify: false,
+    sendUpdates: 'all',
   }
 
   try {
