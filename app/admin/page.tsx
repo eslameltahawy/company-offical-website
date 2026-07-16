@@ -96,6 +96,9 @@ export default function AdminPage() {
 
   const [slackTesting, setSlackTesting] = useState(false)
   const [slackTestResult, setSlackTestResult] = useState<{ ok: boolean; msg: string } | null>(null)
+  const [emailTesting, setEmailTesting] = useState(false)
+  const [emailTestResult, setEmailTestResult] = useState<{ ok: boolean; msg: string } | null>(null)
+  const [testEmailTo, setTestEmailTo] = useState('')
 
   /* slots */
   const [slots, setSlots]         = useState<SlotItem[]>([])
@@ -173,13 +176,30 @@ export default function AdminPage() {
     setSlackTesting(true)
     setSlackTestResult(null)
     try {
-      const res = await fetch(`/api/admin/google-status?pw=${encodeURIComponent(pw)}`, { method: 'POST' })
+      const res = await fetch(`/api/admin/google-status?pw=${encodeURIComponent(pw)}&action=slack`, { method: 'POST' })
       const data = await res.json()
       setSlackTestResult({ ok: data.ok, msg: data.ok ? 'تم إرسال رسالة اختبار ✓' : (data.error || `خطأ: ${data.response}`) })
     } catch {
       setSlackTestResult({ ok: false, msg: 'فشل الاتصال' })
     }
     setSlackTesting(false)
+  }
+
+  async function testEmail() {
+    setEmailTesting(true)
+    setEmailTestResult(null)
+    try {
+      const res = await fetch(`/api/admin/google-status?pw=${encodeURIComponent(pw)}&action=email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ toEmail: testEmailTo }),
+      })
+      const data = await res.json()
+      setEmailTestResult({ ok: data.ok, msg: data.ok ? `تم الإرسال لـ ${data.to} ✓` : (data.error || 'خطأ غير معروف') })
+    } catch {
+      setEmailTestResult({ ok: false, msg: 'فشل الاتصال' })
+    }
+    setEmailTesting(false)
   }
 
   /* ── Bookings actions ──────────────────────────────────────────────── */
@@ -738,6 +758,33 @@ export default function AdminPage() {
                     okText="مضبوط — إيميل التأكيد يُرسل للعميل ✓"
                     failText="غير مضبوط — أضف SMTP_HOST / SMTP_USER / SMTP_PASS"
                   />
+                  {gcalStatus.hasSmtp && (
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="email"
+                          placeholder="إيميل للاختبار (اتركه فاضي للإرسال لنفسك)"
+                          value={testEmailTo}
+                          onChange={(e) => setTestEmailTo(e.target.value)}
+                          className="flex-1 rounded-lg px-3 py-1.5 text-xs outline-none"
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(148,163,184,0.15)', color: '#e2e8f8', direction: 'ltr' }}
+                        />
+                        <button
+                          onClick={testEmail}
+                          disabled={emailTesting}
+                          className="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-50 whitespace-nowrap"
+                          style={{ background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', color: '#60a5fa' }}
+                        >
+                          {emailTesting ? <><i className="fas fa-spinner fa-spin text-[10px]" /> جارٍ...</> : <><i className="fas fa-envelope text-[10px]" /> اختبر الإيميل</>}
+                        </button>
+                      </div>
+                      {emailTestResult && (
+                        <p className="text-[11px] font-semibold" style={{ color: emailTestResult.ok ? '#22c55e' : '#f87171' }}>
+                          {emailTestResult.ok ? '✅' : '❌'} {emailTestResult.msg}
+                        </p>
+                      )}
+                    </div>
+                  )}
                   {!gcalStatus.hasSlackWebhook && (
                     <div className="rounded-xl p-4 text-xs" style={{ background: 'rgba(251,191,36,0.07)', border: '1px solid rgba(251,191,36,0.2)', color: '#fbbf24' }}>
                       <p className="font-bold mb-2">خطوات إعداد Slack Webhook:</p>
