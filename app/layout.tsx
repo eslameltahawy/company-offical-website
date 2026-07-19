@@ -28,7 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         />
       </head>
-      <body className="bg-[#030712] text-[#e2e8f8] antialiased">{children}</body>
+      <body className="bg-[#030712] text-[#e2e8f8] antialiased">
+        {children}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://tscore-indol.vercel.app/widget.js" data-token="ts_verify_183c32eae24addc7a2c5e0cb84c0b407c4db" async></script>
+      </body>
     </html>
   )
 }
