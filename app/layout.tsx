@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-[#030712] text-[#e2e8f8] antialiased">
         {children}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script src="https://tscore-indol.vercel.app/widget.js" data-token="ts_verify_183c32eae24addc7a2c5e0cb84c0b407c4db" async></script>
+        <script src="https://tscore-indol.vercel.app/widget.js" data-token="ts_verify_4919d57dfeb3893e27e0812256e8f4e59bc8" async></script>
       </body>
     </html>
   )
