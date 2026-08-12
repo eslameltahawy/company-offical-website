@@ -109,6 +109,13 @@ export default function AdminPage() {
   const [addingSlot, setAddingSlot] = useState(false)
   const [deletingSlot, setDeletingSlot] = useState<string | null>(null)
   const [slotError, setSlotError] = useState('')
+  const nowRiyadh = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Riyadh' }))
+  const [monthValue, setMonthValue] = useState(
+    `${nowRiyadh.getFullYear()}-${String(nowRiyadh.getMonth() + 1).padStart(2, '0')}`
+  )
+  const [generatingMonth, setGeneratingMonth] = useState(false)
+  const [generateMsg, setGenerateMsg] = useState<{ ok: boolean; text: string } | null>(null)
+  const [manualEditOpen, setManualEditOpen] = useState(false)
 
   /* ── Data fetchers ─────────────────────────────────────────────────── */
 
@@ -259,6 +266,35 @@ export default function AdminPage() {
     setAddingSlot(false)
   }
 
+  async function handleGenerateMonth() {
+    setGenerateMsg(null)
+    const [y, m] = monthValue.split('-').map(Number)
+    if (!y || !m) { setGenerateMsg({ ok: false, text: 'اختر شهراً صالحاً' }); return }
+    setGeneratingMonth(true)
+    try {
+      const res = await fetch(`/api/admin/slots?pw=${encodeURIComponent(pw)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'generateMonth', year: y, month: m }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setGenerateMsg({ ok: false, text: 'فشل التفعيل — حاول مجدداً' })
+      } else {
+        setGenerateMsg({
+          ok: true,
+          text: data.added === 0
+            ? 'المواعيد الافتراضية لهذا الشهر مفعّلة مسبقاً'
+            : `تم تفعيل ${data.added} موعد افتراضي (أحد–خميس · 9ص–6م)`,
+        })
+        fetchSlots(pw)
+      }
+    } catch {
+      setGenerateMsg({ ok: false, text: 'فشل الاتصال' })
+    }
+    setGeneratingMonth(false)
+  }
+
   async function handleDeleteSlot(id: string) {
     setDeletingSlot(id)
     await fetch(`/api/admin/slots?pw=${encodeURIComponent(pw)}`, {
@@ -286,6 +322,8 @@ export default function AdminPage() {
   const todayCount = bookings.filter((b) => isToday(b.createdAt)).length
   const bookedSlots = slots.filter((s) => s.booked).length
   const freeSlots   = slots.filter((s) => !s.booked).length
+  const monthSlots  = slots.filter((s) => s.date.startsWith(monthValue))
+  const displaySlots = monthValue ? monthSlots : slots
 
   /* ── Shared card style ─────────────────────────────────────────────── */
   const card = { background: 'rgba(13,21,37,0.8)', border: '1px solid rgba(148,163,184,0.08)', borderRadius: 12 }
@@ -572,64 +610,110 @@ export default function AdminPage() {
         {tab === 'slots' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-            {/* Add slot form */}
-            <div className="rounded-2xl p-6" style={card}>
-              <h3 className="text-sm font-bold text-[#e2e8f8] mb-4 flex items-center gap-2">
-                <i className="fas fa-plus-circle text-[#2563eb] text-base" />
-                إضافة موعد جديد
-              </h3>
-              <form onSubmit={handleAddSlot} className="space-y-3">
-                <div>
-                  <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>التاريخ</label>
-                  <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)}
-                    className="w-full" style={{ ...inputStyle, direction: 'ltr' }} />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>الوقت (AST +3)</label>
-                  <input type="time" value={newTime} onChange={(e) => setNewTime(e.target.value)}
-                    className="w-full" style={{ ...inputStyle, direction: 'ltr' }} />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>المدة (دقيقة)</label>
-                  <select value={newDur} onChange={(e) => setNewDur(Number(e.target.value))}
-                    className="w-full" style={{ ...inputStyle }}>
-                    <option value={15}>15 دقيقة</option>
-                    <option value={30}>30 دقيقة</option>
-                    <option value={45}>45 دقيقة</option>
-                    <option value={60}>ساعة كاملة</option>
-                  </select>
-                </div>
-                {slotError && <p className="text-xs" style={{ color: '#f87171' }}>{slotError}</p>}
-                <button type="submit" disabled={addingSlot}
-                  className="w-full py-2.5 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5"
-                  style={{ background: '#2563eb', boxShadow: '0 4px 16px rgba(37,99,235,0.3)' }}>
-                  {addingSlot ? <><i className="fas fa-spinner fa-spin text-xs" /> جارٍ الإضافة...</> : <><i className="fas fa-plus text-xs" /> أضف الموعد</>}
-                </button>
-              </form>
-
-              <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(148,163,184,0.08)' }}>
-                <p className="text-[11px] leading-relaxed" style={{ color: '#3d5270' }}>
-                  <i className="fas fa-info-circle text-[#2563eb] me-1" />
-                  المواعيد التي تضيفها هنا ستظهر فوراً للعملاء. يمكنك حذف أي موعد من القائمة على اليمين.
+            {/* Month defaults + manual edit */}
+            <div className="rounded-2xl p-6 space-y-5" style={card}>
+              <div>
+                <h3 className="text-sm font-bold text-[#e2e8f8] mb-1 flex items-center gap-2">
+                  <i className="fas fa-calendar-alt text-[#2563eb] text-base" />
+                  تفعيل مواعيد الشهر
+                </h3>
+                <p className="text-[11px] leading-relaxed mb-4" style={{ color: '#3d5270' }}>
+                  الافتراضي: الأحد–الخميس · من 9:00 ص إلى 6:00 م · كل 30 دقيقة
                 </p>
+
+                <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>الشهر</label>
+                <input
+                  type="month"
+                  value={monthValue}
+                  onChange={(e) => { setMonthValue(e.target.value); setGenerateMsg(null) }}
+                  className="w-full mb-3"
+                  style={{ ...inputStyle, direction: 'ltr' }}
+                />
+
+                <button
+                  type="button"
+                  onClick={handleGenerateMonth}
+                  disabled={generatingMonth || !monthValue}
+                  className="w-full py-2.5 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                  style={{ background: '#2563eb', boxShadow: '0 4px 16px rgba(37,99,235,0.3)' }}
+                >
+                  {generatingMonth
+                    ? <><i className="fas fa-spinner fa-spin text-xs" /> جارٍ التفعيل...</>
+                    : <><i className="fas fa-bolt text-xs" /> تفعيل المواعيد الافتراضية</>}
+                </button>
+
+                {generateMsg && (
+                  <p className="text-[11px] mt-2 font-semibold" style={{ color: generateMsg.ok ? '#22c55e' : '#f87171' }}>
+                    {generateMsg.ok ? '✅' : '❌'} {generateMsg.text}
+                  </p>
+                )}
+              </div>
+
+              <div style={{ borderTop: '1px solid rgba(148,163,184,0.08)' }} className="pt-4">
+                <button
+                  type="button"
+                  onClick={() => setManualEditOpen((v) => !v)}
+                  className="w-full flex items-center justify-between text-sm font-bold text-[#e2e8f8] py-1"
+                  style={{ fontFamily: 'Cairo' }}
+                >
+                  <span className="flex items-center gap-2">
+                    <i className="fas fa-pen text-[#60a5fa] text-xs" />
+                    تعديل يدوي
+                  </span>
+                  <i className={`fas fa-chevron-${manualEditOpen ? 'up' : 'down'} text-[10px]`} style={{ color: '#3d5270' }} />
+                </button>
+
+                {manualEditOpen && (
+                  <form onSubmit={handleAddSlot} className="space-y-3 mt-3">
+                    <div>
+                      <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>التاريخ</label>
+                      <input type="date" value={newDate} onChange={(e) => setNewDate(e.target.value)}
+                        className="w-full" style={{ ...inputStyle, direction: 'ltr' }} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>الوقت (AST +3)</label>
+                      <input type="time" value={newTime} onChange={(e) => setNewTime(e.target.value)}
+                        className="w-full" style={{ ...inputStyle, direction: 'ltr' }} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold mb-1" style={{ color: '#7a93bc' }}>المدة (دقيقة)</label>
+                      <select value={newDur} onChange={(e) => setNewDur(Number(e.target.value))}
+                        className="w-full" style={{ ...inputStyle }}>
+                        <option value={15}>15 دقيقة</option>
+                        <option value={30}>30 دقيقة</option>
+                        <option value={45}>45 دقيقة</option>
+                        <option value={60}>ساعة كاملة</option>
+                      </select>
+                    </div>
+                    {slotError && <p className="text-xs" style={{ color: '#f87171' }}>{slotError}</p>}
+                    <button type="submit" disabled={addingSlot}
+                      className="w-full py-2.5 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2"
+                      style={{ background: 'rgba(37,99,235,0.85)' }}>
+                      {addingSlot ? <><i className="fas fa-spinner fa-spin text-xs" /> جارٍ الإضافة...</> : <><i className="fas fa-plus text-xs" /> أضف موعداً</>}
+                    </button>
+                    <p className="text-[10px] leading-relaxed" style={{ color: '#3d5270' }}>
+                      استخدم التعديل اليدوي لإضافة يوم أو ساعة خارج الجدول الافتراضي، أو احذف من القائمة لإلغاء موعد معيّن.
+                    </p>
+                  </form>
+                )}
               </div>
             </div>
 
             {/* Slots list */}
             <div className="lg:col-span-2 rounded-2xl overflow-hidden" style={card}>
-              <div className="px-5 py-4 border-b flex items-center justify-between" style={{ borderColor: 'rgba(148,163,184,0.08)' }}>
+              <div className="px-5 py-4 border-b flex items-center justify-between flex-wrap gap-2" style={{ borderColor: 'rgba(148,163,184,0.08)' }}>
                 <h3 className="text-sm font-bold text-[#e2e8f8]">
-                  جميع المواعيد
-                  <span className="mr-2 text-xs font-normal" style={{ color: '#3d5270' }}>({slots.length})</span>
+                  مواعيد {monthValue}
+                  <span className="mr-2 text-xs font-normal" style={{ color: '#3d5270' }}>({displaySlots.length})</span>
                 </h3>
                 <div className="flex items-center gap-3 text-[11px]">
                   <span className="flex items-center gap-1" style={{ color: '#60a5fa' }}>
                     <span className="w-2 h-2 rounded-full inline-block" style={{ background: '#2563eb' }} />
-                    متاح ({freeSlots})
+                    متاح ({displaySlots.filter((s) => !s.booked).length})
                   </span>
                   <span className="flex items-center gap-1" style={{ color: '#3d5270' }}>
                     <span className="w-2 h-2 rounded-full inline-block" style={{ background: '#3d5270' }} />
-                    محجوز ({bookedSlots})
+                    محجوز ({displaySlots.filter((s) => s.booked).length})
                   </span>
                 </div>
               </div>
@@ -638,14 +722,15 @@ export default function AdminPage() {
                 <div className="flex items-center justify-center py-16">
                   <i className="fas fa-spinner fa-spin text-[#2563eb] text-xl" />
                 </div>
-              ) : slots.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-16">
+              ) : displaySlots.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
                   <i className="fas fa-calendar-times text-4xl mb-3" style={{ color: '#3d5270' }} />
-                  <p className="text-sm" style={{ color: '#3d5270' }}>لا توجد مواعيد — أضف موعداً من النموذج</p>
+                  <p className="text-sm mb-2" style={{ color: '#3d5270' }}>لا توجد مواعيد لهذا الشهر</p>
+                  <p className="text-[11px]" style={{ color: '#3d5270' }}>اضغط «تفعيل المواعيد الافتراضية» لفتح الجدول</p>
                 </div>
               ) : (
                 <div className="overflow-y-auto max-h-[520px]">
-                  {slots.map((slot) => (
+                  {displaySlots.map((slot) => (
                     <div
                       key={slot.id}
                       className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-white/[0.02]"
