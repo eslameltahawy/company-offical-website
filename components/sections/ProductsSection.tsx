@@ -135,14 +135,14 @@ export default function ProductsSection() {
             className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
           >
-            ثمانية منتجات،{' '}
-            <span className="gradient-text">هوية واحدة</span>
+            ثمانية منتجات رقمية،{' '}
+            <span className="gradient-text">بهوية واحدة</span>
           </h2>
           <p
             className="text-[#7a93bc] max-w-[540px] mx-auto text-base leading-relaxed"
             style={{ fontFamily: 'Cairo' }}
           >
-            كل منتج يحل مشكلة حقيقية في إدارة الشركات السعودية — اضغط على أي منتج لتعرف عنه كل شيء في 10 ثوانٍ.
+            حلول ذكية متطورة لإدارة الشركات السعودية
           </p>
         </motion.div>
 
@@ -199,7 +199,7 @@ export default function ProductsSection() {
           className="mt-14 text-center"
         >
           <p className="text-[#7a93bc] text-sm mb-4" style={{ fontFamily: 'Cairo' }}>
-            هل تريد معرفة أي المنتجات يناسب شركتك؟
+            لا تتردد واسأل عن المنتج المناسب لشركتك
           </p>
           <a
             href="#booking"

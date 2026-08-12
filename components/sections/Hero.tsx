@@ -29,11 +29,9 @@ const products = [
 
 // Headline split for word-by-word animation
 const headlineWords = [
-  { text: 'نبني',    gradient: false },
-  { text: 'أنظمة',  gradient: false },
-  { text: 'تدير',   gradient: false },
-  { text: 'شركتك',  gradient: true  },
-  { text: 'بالكامل', gradient: false },
+  { text: 'إدارة',   gradient: false },
+  { text: 'منظومة', gradient: true  },
+  { text: 'كاملة',  gradient: false },
 ]
 
 export default function Hero() {
@@ -93,8 +91,7 @@ export default function Hero() {
               className="text-[#7a93bc] text-base leading-[1.9] max-w-[500px] mb-8"
               style={{ fontFamily: 'Cairo' }}
             >
-              سماو بيت منتجات برمجية سعودي متخصص في بناء أنظمة إدارة المؤسسات.
-              ثمانية منتجات متكاملة تُغطي كل احتياجات شركتك، مصمّمة أصلاً للسوق السعودي.
+              متخصصين في أنظمة برمجة المؤسسات وتشغيل الشركات في السوق السعودي بما يتوافق مع رؤية السعودية للتشغيل الرقمي 2030 بحلول مبتكرة خاصة بنا.
             </motion.p>
 
             <motion.div {...fadeUp(1.0)} className="flex flex-wrap gap-3 mb-12">
