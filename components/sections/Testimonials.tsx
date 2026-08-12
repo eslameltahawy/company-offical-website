@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const testimonials = [
   {
@@ -49,7 +50,7 @@ const testimonials = [
     role: 'مديرة الإدارة',
     company: 'مكتب استشارات — الرياض',
     initial: 'ن',
-    color: '#e11d48',
+    color: '#2563eb',
   },
   {
     quote: 'كنا نبحث عن نظام يناسب حجمنا كشركة متوسطة دون تكاليف ضخمة. وجدنا ما نحتاجه.',
@@ -69,6 +70,43 @@ const testimonials = [
   },
 ]
 
+function TestimonialCard({ t }: { t: (typeof testimonials)[number] }) {
+  return (
+    <div
+      className="relative rounded-2xl p-5 border border-[rgba(148,163,184,0.08)] flex flex-col h-full"
+      style={{ background: 'rgba(13,21,37,0.9)' }}
+    >
+      <div
+        className="absolute top-3 left-4 text-5xl leading-none font-serif opacity-[0.07] pointer-events-none select-none"
+        style={{ color: t.color }}
+      >
+        "
+      </div>
+      <div className="flex gap-0.5 mb-3">
+        {Array.from({ length: 5 }).map((_, j) => (
+          <i key={j} className="fas fa-star text-[#60a5fa] text-[10px]" />
+        ))}
+      </div>
+      <p className="relative z-10 text-[#c8d6ee] text-sm leading-relaxed mb-4 flex-1" style={{ fontFamily: 'Cairo' }}>
+        "{t.quote}"
+      </p>
+      <div className="flex items-center gap-2.5 border-t border-[rgba(148,163,184,0.07)] pt-3">
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
+          style={{ background: t.color }}
+        >
+          {t.initial}
+        </div>
+        <div>
+          <p className="text-xs font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>{t.author}</p>
+          <p className="text-[10px] text-[#7a93bc] leading-tight" style={{ fontFamily: 'Cairo' }}>{t.role}</p>
+          <p className="text-[9px] text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{t.company}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Testimonials() {
   return (
     <section
@@ -77,20 +115,15 @@ export default function Testimonials() {
       style={{ background: 'rgba(10,16,32,0.5)' }}
     >
       <div className="container-smaw">
-
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-          className="text-center mb-14"
+          className="text-center mb-8 lg:mb-14"
         >
           <span className="badge mb-4">CLIENT STORIES</span>
-          <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
-            style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
-          >
+          <h2 className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4" style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}>
             ماذا يقول{' '}
             <span className="gradient-text">عملاؤنا</span>
           </h2>
@@ -99,8 +132,19 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Grid — 4 cols on xl, 3 on lg, 2 on md, 1 on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {/* Mobile carousel */}
+        <div className="lg:hidden -mx-4">
+          <MobileCarousel>
+            {testimonials.map((t) => (
+              <MobileCarouselItem key={t.author} width="88vw" className="first:ms-4 last:me-4">
+                <TestimonialCard t={t} />
+              </MobileCarouselItem>
+            ))}
+          </MobileCarousel>
+        </div>
+
+        {/* Desktop grid */}
+        <div className="hidden lg:grid grid-cols-4 gap-4">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.author}
@@ -108,50 +152,8 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.05 }}
-              className="relative rounded-2xl p-5 border border-[rgba(148,163,184,0.08)] hover:border-[rgba(148,163,184,0.14)] transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
-              style={{ background: 'rgba(13,21,37,0.8)' }}
             >
-              {/* Decorative quote mark */}
-              <div
-                className="absolute top-3 left-4 text-5xl leading-none font-serif opacity-[0.07] pointer-events-none select-none"
-                style={{ color: t.color }}
-              >
-                "
-              </div>
-
-              {/* Stars */}
-              <div className="flex gap-0.5 mb-3">
-                {Array.from({ length: 5 }).map((_, j) => (
-                  <i key={j} className="fas fa-star text-[#60a5fa] text-[10px]" />
-                ))}
-              </div>
-
-              <p
-                className="relative z-10 text-[#c8d6ee] text-xs leading-relaxed mb-4 flex-1"
-                style={{ fontFamily: 'Cairo' }}
-              >
-                "{t.quote}"
-              </p>
-
-              <div className="flex items-center gap-2.5 border-t border-[rgba(148,163,184,0.07)] pt-3">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
-                  style={{ background: t.color }}
-                >
-                  {t.initial}
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-                    {t.author}
-                  </p>
-                  <p className="text-[10px] text-[#7a93bc] leading-tight" style={{ fontFamily: 'Cairo' }}>
-                    {t.role}
-                  </p>
-                  <p className="text-[9px] text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>
-                    {t.company}
-                  </p>
-                </div>
-              </div>
+              <TestimonialCard t={t} />
             </motion.div>
           ))}
         </div>
@@ -159,4 +161,3 @@ export default function Testimonials() {
     </section>
   )
 }
-

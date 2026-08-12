@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -43,37 +44,65 @@ const pillars = [
   },
 ]
 
+function PillarCard({ p }: { p: (typeof pillars)[number] }) {
+  return (
+    <div
+      className="rounded-2xl p-5 lg:p-6 h-full"
+      style={{ background: 'rgba(13,21,37,0.9)', border: '1px solid rgba(148,163,184,0.09)' }}
+    >
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+        style={{ background: `${p.color}15`, color: p.color }}
+      >
+        <i className={`${p.icon} text-base`} />
+      </div>
+      <h3 className="text-base font-bold text-[#e2e8f8] mb-2" style={{ fontFamily: 'Cairo' }}>
+        {p.title}
+      </h3>
+      <p className="text-sm text-[#7a93bc] leading-relaxed" style={{ fontFamily: 'Cairo' }}>
+        {p.desc}
+      </p>
+    </div>
+  )
+}
+
 export default function WhySMAW() {
   return (
     <section id="why" className="section border-t border-[rgba(148,163,184,0.07)]">
       <div className="container-smaw">
-
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.65, ease: EASE }}
-          className="text-center mb-16"
+          className="text-center mb-8 lg:mb-16"
         >
           <span className="badge mb-4">لماذا سماو</span>
           <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+            className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
           >
             لماذا سماو؟{' '}
             <span className="gradient-text">الشريك التشغيلي الذكي</span>
           </h2>
-          <p
-            className="text-[#7a93bc] max-w-[520px] mx-auto text-base leading-relaxed"
-            style={{ fontFamily: 'Cairo' }}
-          >
+          <p className="text-[#7a93bc] max-w-[520px] mx-auto text-sm lg:text-base leading-relaxed" style={{ fontFamily: 'Cairo' }}>
             نفهمك ونحقق لمؤسستك الاحترافية المطلوبة بالسوق السعودي
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Mobile snap carousel */}
+        <div className="lg:hidden -mx-4 mb-8">
+          <MobileCarousel>
+            {pillars.map((p) => (
+              <MobileCarouselItem key={p.title} width="78vw" className="first:ms-4 last:me-4">
+                <PillarCard p={p} />
+              </MobileCarouselItem>
+            ))}
+          </MobileCarousel>
+        </div>
+
+        {/* Desktop grid */}
+        <div className="hidden lg:grid grid-cols-3 gap-5">
           {pillars.map((p, i) => (
             <motion.div
               key={p.title}
@@ -81,42 +110,22 @@ export default function WhySMAW() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
-              className="rounded-2xl p-6"
-              style={{ background: 'rgba(13,21,37,0.8)', border: '1px solid rgba(148,163,184,0.09)' }}
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                style={{ background: `${p.color}15`, color: p.color }}
-              >
-                <i className={`${p.icon} text-base`} />
-              </div>
-              <h3
-                className="text-base font-bold text-[#e2e8f8] mb-2"
-                style={{ fontFamily: 'Cairo' }}
-              >
-                {p.title}
-              </h3>
-              <p
-                className="text-sm text-[#7a93bc] leading-relaxed"
-                style={{ fontFamily: 'Cairo' }}
-              >
-                {p.desc}
-              </p>
+              <PillarCard p={p} />
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.3 }}
-          className="mt-12 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="mt-8 lg:mt-12 rounded-2xl p-5 lg:p-8 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 lg:gap-6"
           style={{ background: 'rgba(37,99,235,0.07)', border: '1px solid rgba(37,99,235,0.18)' }}
         >
           <div>
-            <h3 className="text-xl font-bold text-[#e2e8f8] mb-1" style={{ fontFamily: 'Cairo' }}>
+            <h3 className="text-lg lg:text-xl font-bold text-[#e2e8f8] mb-1" style={{ fontFamily: 'Cairo' }}>
               مستعد للتحول الرقمي اللي بيطور شركتك؟
             </h3>
             <p className="text-sm text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>
@@ -125,7 +134,7 @@ export default function WhySMAW() {
           </div>
           <a
             href="#booking"
-            className="flex-shrink-0 inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-sm shadow-[0_4px_20px_rgba(37,99,235,0.3)] whitespace-nowrap"
+            className="w-full lg:w-auto inline-flex items-center justify-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-6 py-3.5 rounded-2xl lg:rounded-xl text-sm shadow-[0_4px_20px_rgba(37,99,235,0.3)]"
             style={{ fontFamily: 'Cairo' }}
           >
             احجز استشارة مجانية

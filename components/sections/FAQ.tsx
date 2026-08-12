@@ -52,7 +52,7 @@ export default function FAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-16 items-start">
 
           {/* Left — sticky header + illustration */}
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-28 mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -61,28 +61,28 @@ export default function FAQ() {
             >
               <span className="badge mb-4">FAQ</span>
               <h2
-                className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+                className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
                 style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
               >
                 أسئلة{' '}
                 <span className="gradient-text">يسألها الجميع</span>
               </h2>
               <p
-                className="text-[#7a93bc] text-sm leading-relaxed mb-8"
+                className="text-[#7a93bc] text-sm leading-relaxed mb-6 lg:mb-8"
                 style={{ fontFamily: 'Cairo', maxWidth: 340 }}
               >
                 لديك سؤال آخر؟ فريقنا يجيبك مباشرةً عبر الواتساب أو نموذج الحجز
               </p>
 
-              {/* Illustration */}
+              {/* Illustration — desktop only */}
               <div
-                className="w-48 h-48 rounded-3xl overflow-hidden mx-auto lg:mx-0"
+                className="hidden lg:block w-48 h-48 rounded-3xl overflow-hidden"
                 style={{ background: 'rgba(13,21,37,0.6)', border: '1px solid rgba(148,163,184,0.08)' }}
               >
                 <img src="/img/faq.png" alt="FAQ" className="w-full h-full object-cover" />
               </div>
 
-              <div className="mt-6 space-y-3">
+              <div className="flex lg:flex-col gap-3 mt-0 lg:mt-6 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 -mx-1 px-1">
                 {[
                   { icon: 'fab fa-whatsapp', text: 'تواصل عبر واتساب', color: '#2563eb' },
                   { icon: 'fas fa-calendar-check', text: 'احجز موعداً الآن', color: '#2563eb' },
@@ -90,11 +90,16 @@ export default function FAQ() {
                   <a
                     key={item.text}
                     href="#booking"
-                    className="flex items-center gap-2.5 text-sm font-semibold transition-colors hover:opacity-80"
-                    style={{ fontFamily: 'Cairo', color: item.color }}
+                    className="flex items-center gap-2.5 text-sm font-semibold transition-colors hover:opacity-80 flex-shrink-0 px-3 py-2.5 rounded-xl lg:px-0 lg:py-0 lg:rounded-none lg:bg-transparent lg:border-0"
+                    style={{
+                      fontFamily: 'Cairo',
+                      color: item.color,
+                      background: 'rgba(37,99,235,0.08)',
+                      border: '1px solid rgba(37,99,235,0.15)',
+                    }}
                   >
                     <div
-                      className="w-7 h-7 rounded-lg flex items-center justify-center"
+                      className="w-8 h-8 lg:w-7 lg:h-7 rounded-lg flex items-center justify-center"
                       style={{ background: `${item.color}15`, border: `1px solid ${item.color}25` }}
                     >
                       <i className={`${item.icon} text-[11px]`} style={{ color: item.color }} />
@@ -118,14 +123,14 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full text-right rounded-2xl px-5 py-4 flex items-start gap-3 transition-all duration-200"
+                  className="w-full text-right rounded-2xl px-4 lg:px-5 py-4 min-h-[56px] flex items-start gap-3 transition-all duration-200"
                   style={{
                     background: open === i ? 'rgba(37,99,235,0.08)' : 'rgba(13,21,37,0.7)',
                     border: `1px solid ${open === i ? 'rgba(37,99,235,0.25)' : 'rgba(148,163,184,0.08)'}`,
                   }}
                 >
                   <div
-                    className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200"
+                    className="w-8 h-8 lg:w-6 lg:h-6 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-200"
                     style={{
                       background: open === i ? 'rgba(37,99,235,0.2)' : 'rgba(148,163,184,0.06)',
                       border: `1px solid ${open === i ? 'rgba(37,99,235,0.35)' : 'rgba(148,163,184,0.1)'}`,
@@ -137,7 +142,7 @@ export default function FAQ() {
                     />
                   </div>
                   <span
-                    className="text-sm font-semibold text-right flex-1"
+                    className="text-sm font-semibold text-right flex-1 leading-relaxed"
                     style={{ fontFamily: 'Cairo', color: open === i ? '#e2e8f8' : '#7a93bc' }}
                   >
                     {faq.q}

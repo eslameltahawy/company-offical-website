@@ -10,10 +10,11 @@ import BookingCTA     from '@/components/sections/BookingCTA'
 import FinalCTA       from '@/components/sections/FinalCTA'
 import Footer         from '@/components/layout/Footer'
 import Chatbot        from '@/components/Chatbot'
+import MobileBottomNav from '@/components/mobile/MobileBottomNav'
 
 export default function Home() {
   return (
-    <main className="mesh-bg min-h-screen">
+    <main id="top" className="mesh-bg min-h-screen main-mobile-shell">
       <Navbar />
       <Hero />
       <Marquee />
@@ -26,6 +27,7 @@ export default function Home() {
       <FinalCTA />
       <Footer />
       <Chatbot />
+      <MobileBottomNav />
     </main>
   )
 }

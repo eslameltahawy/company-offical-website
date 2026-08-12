@@ -75,11 +75,11 @@ function LogoSet({ hidden }: { hidden?: boolean }) {
 export default function Marquee() {
   return (
     <section
-      className="w-full py-12 border-y border-[rgba(148,163,184,0.07)]"
+      className="w-full py-7 lg:py-12 border-y border-[rgba(148,163,184,0.07)]"
       style={{ background: 'rgba(10,16,32,0.5)', overflow: 'hidden' }}
     >
       <p
-        className="text-center text-[10px] uppercase tracking-[3px] text-[#3d5270] mb-8 font-semibold"
+        className="text-center text-[9px] lg:text-[10px] uppercase tracking-[3px] text-[#3d5270] mb-5 lg:mb-8 font-semibold"
         style={{ fontFamily: 'Cairo' }}
       >
         تكامل سلس مع المنصات العالمية

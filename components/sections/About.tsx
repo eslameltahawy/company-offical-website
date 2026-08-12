@@ -72,18 +72,18 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.65, ease: EASE }}
-          className="text-center mb-16"
+          className="text-center mb-10 lg:mb-16"
         >
           <span className="badge mb-4">ABOUT</span>
           <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight mb-4"
+            className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
           >
             من نحن —{' '}
             <span className="gradient-text">بيت منتجات تقنية سعودي</span>
           </h2>
           <p
-            className="text-[#7a93bc] max-w-[560px] mx-auto text-base leading-relaxed"
+            className="text-[#7a93bc] max-w-[560px] mx-auto text-sm lg:text-base leading-relaxed"
             style={{ fontFamily: 'Cairo' }}
           >
             SMAW Software شركة سعودية متخصصة في بناء منتجات وأنظمة برمجية عالية الأداء
@@ -92,7 +92,7 @@ export default function About() {
         </motion.div>
 
         {/* ── Stats ──────────────────────────────── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-12 lg:mb-20">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -113,7 +113,7 @@ export default function About() {
         </div>
 
         {/* ── Vision & Mission ──────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-12 lg:mb-20">
           {[
             {
               icon: 'fas fa-eye',

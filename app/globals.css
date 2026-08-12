@@ -162,3 +162,28 @@ body {
     radial-gradient(ellipse 40% 30% at 20% 80%, rgba(139,92,246,0.06) 0%, transparent 55%),
     #030712;
 }
+
+/* ── Mobile app shell ──────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .section {
+    padding: 2.75rem 0;
+  }
+
+  .main-mobile-shell {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-carousel {
+    padding-inline: 1rem;
+    margin-inline: -0; /* keep flush with container padding via parent */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .mobile-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .container-smaw {
+    padding: 0 1rem;
+  }
+}

@@ -14,7 +14,7 @@ export default function FinalCTA() {
   return (
     <section
       className="relative overflow-hidden border-t border-[rgba(148,163,184,0.07)]"
-      style={{ padding: 'clamp(5rem,10vw,9rem) 0' }}
+        style={{ padding: 'clamp(3rem,8vw,9rem) 0' }}
     >
       {/* Background glow */}
       <div
@@ -71,7 +71,7 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
-            className="text-[#7a93bc] text-lg leading-relaxed mb-10"
+            className="text-[#7a93bc] text-sm lg:text-lg leading-relaxed mb-8 lg:mb-10 px-1"
             style={{ fontFamily: 'Cairo' }}
           >
             انضم لأكثر من 50 شركة سعودية وخليجية تدير موارد بشريتها بذكاء وكفاءة مع SMAW —
@@ -84,12 +84,12 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-8 mb-12"
+            className="flex flex-wrap justify-center gap-6 lg:gap-8 mb-8 lg:mb-12"
           >
             {socialProof.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-3xl font-bold mb-1" style={{ fontFamily: 'Cairo', color: '#60a5fa' }}>{s.value}</p>
-                <p className="text-sm text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{s.label}</p>
+                <p className="text-2xl lg:text-3xl font-bold mb-1" style={{ fontFamily: 'Cairo', color: '#60a5fa' }}>{s.value}</p>
+                <p className="text-xs lg:text-sm text-[#3d5270]" style={{ fontFamily: 'Cairo' }}>{s.label}</p>
               </div>
             ))}
           </motion.div>
@@ -100,11 +100,11 @@ export default function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col items-stretch lg:items-center lg:flex-row justify-center gap-3 lg:gap-4 px-1"
           >
             <a
               href="#booking"
-              className="inline-flex items-center gap-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold px-10 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 text-base"
+              className="inline-flex items-center justify-center gap-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold px-8 lg:px-10 py-4 rounded-2xl transition-all duration-200 text-sm lg:text-base w-full lg:w-auto"
               style={{
                 fontFamily: 'Cairo',
                 boxShadow: '0 10px 40px rgba(37,99,235,0.4)',
@@ -114,8 +114,8 @@ export default function FinalCTA() {
               احجز عرضك المجاني الآن
             </a>
             <a
-              href="#hr"
-              className="inline-flex items-center gap-2 text-[#60a5fa] hover:text-white transition-colors text-sm font-semibold"
+              href="#products"
+              className="inline-flex items-center justify-center gap-2 text-[#60a5fa] hover:text-white transition-colors text-sm font-semibold py-2"
               style={{ fontFamily: 'Cairo' }}
             >
               تعرّف على المنتج أولاً

@@ -27,11 +27,11 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer
-      className="border-t border-[rgba(148,163,184,0.07)] pt-16 pb-8"
+      className="border-t border-[rgba(148,163,184,0.07)] pt-10 lg:pt-16 pb-6 lg:pb-8"
       style={{ background: 'rgba(10,16,32,0.8)' }}
     >
       <div className="container-smaw">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-10 lg:mb-12">
 
           {/* Brand */}
           <div>
@@ -53,12 +53,12 @@ export default function Footer() {
             <h4 className="text-[10px] uppercase tracking-[2px] text-[#3d5270] font-bold mb-5" style={{ fontFamily: 'Cairo' }}>
               المنتجات
             </h4>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-x-3 gap-y-3">
               {footerLinks.products.map((l) => (
                 <li key={l.label}>
                   <a
                     href={l.href}
-                    className="text-sm text-[#7a93bc] hover:text-[#e2e8f8] transition-colors duration-200"
+                    className="text-sm text-[#7a93bc] hover:text-[#e2e8f8] transition-colors duration-200 py-1 inline-block"
                     style={{ fontFamily: 'Cairo' }}
                   >
                     {l.label}

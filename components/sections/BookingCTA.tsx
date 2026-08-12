@@ -121,20 +121,20 @@ export default function BookingCTA() {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      className="lg:sticky lg:top-28"
+      className="lg:sticky lg:top-28 mb-8 lg:mb-0"
     >
       <span className="badge mb-4">BOOK A DEMO</span>
       <h2
-        className="text-3xl sm:text-4xl font-bold tracking-tight mb-5"
+        className="text-2xl lg:text-4xl font-bold tracking-tight mb-4 lg:mb-5"
         style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
       >
         احجز موعدك<br />
         <span className="gradient-text">نتواصل معك قريباً</span>
       </h2>
-      <p className="text-[#7a93bc] text-sm leading-relaxed mb-8 max-w-[400px]" style={{ fontFamily: 'Cairo' }}>
+      <p className="text-[#7a93bc] text-sm leading-relaxed mb-6 lg:mb-8 max-w-[400px]" style={{ fontFamily: 'Cairo' }}>
         اختر الوقت المناسب من المواعيد المتاحة، ثم أدخل بياناتك وسيصلك تأكيد فوري مع رابط Google Meet.
       </p>
-      <div className="space-y-4">
+      <div className="hidden lg:block space-y-4">
         {[
           { icon: 'fas fa-calendar-check', text: 'اختر موعدك من الأوقات المتاحة' },
           { icon: 'fas fa-video',          text: 'رابط Google Meet يصلك على إيميلك' },
@@ -159,7 +159,7 @@ export default function BookingCTA() {
       style={{ background: 'rgba(10,16,32,0.7)' }}
     >
       <div className="container-smaw">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {leftCol}
 
           {/* Right — dynamic panel */}
@@ -262,7 +262,7 @@ export default function BookingCTA() {
                             >
                               {dateLabel(date)}
                             </p>
-                            <div className="grid grid-cols-2 gap-2">
+                            <div className="flex lg:grid lg:grid-cols-2 gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 -mx-1 px-1 snap-x snap-mandatory">
                               {times.map((slot) => {
                                 const isSelected = selectedSlot?.id === slot.id
                                 return (
@@ -270,7 +270,7 @@ export default function BookingCTA() {
                                     key={slot.id}
                                     disabled={slot.booked}
                                     onClick={() => setSelectedSlot(isSelected ? null : slot)}
-                                    className="relative rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 text-right"
+                                    className="relative rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 text-right flex-shrink-0 w-[42%] lg:w-auto snap-center"
                                     style={{
                                       fontFamily: 'Cairo',
                                       background: slot.booked
@@ -393,7 +393,7 @@ export default function BookingCTA() {
                       </div>
 
                       {/* Phone + Email row */}
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-semibold text-[#7a93bc] mb-1.5" style={{ fontFamily: 'Cairo' }}>
                             الجوال
@@ -427,7 +427,7 @@ export default function BookingCTA() {
 
                       <button
                         type="submit" disabled={loading}
-                        className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-60 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(37,99,235,0.3)] flex items-center justify-center gap-2"
+                        className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] disabled:opacity-60 text-white font-bold py-3.5 px-6 rounded-2xl lg:rounded-lg transition-all duration-200 shadow-[0_4px_20px_rgba(37,99,235,0.3)] flex items-center justify-center gap-2"
                         style={{ fontFamily: 'Cairo' }}
                       >
                         {loading ? (

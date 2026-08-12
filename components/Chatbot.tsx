@@ -121,7 +121,7 @@ export default function Chatbot() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 2.5, duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center shadow-[0_8px_32px_rgba(37,99,235,0.45)] transition-colors duration-200"
+        className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] lg:bottom-6 left-4 lg:left-6 z-50 w-14 h-14 rounded-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white flex items-center justify-center shadow-[0_8px_32px_rgba(37,99,235,0.45)] transition-colors duration-200"
         aria-label="مساعد سماو"
       >
         <AnimatePresence mode="wait">
@@ -152,8 +152,8 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-            className="fixed bottom-24 left-6 z-50 w-[340px] flex flex-col rounded-2xl overflow-hidden border border-[rgba(148,163,184,0.1)] shadow-[0_24px_60px_rgba(0,0,0,0.55)]"
-            style={{ background: 'rgba(13,21,37,0.97)', backdropFilter: 'blur(24px)', maxHeight: 500 }}
+            className="fixed bottom-[calc(8.5rem+env(safe-area-inset-bottom))] lg:bottom-24 left-3 right-3 lg:left-6 lg:right-auto z-50 lg:w-[340px] flex flex-col rounded-2xl overflow-hidden border border-[rgba(148,163,184,0.1)] shadow-[0_24px_60px_rgba(0,0,0,0.55)]"
+            style={{ background: 'rgba(13,21,37,0.97)', backdropFilter: 'blur(24px)', maxHeight: 'min(500px, 62vh)' }}
           >
             {/* Header */}
             <div
