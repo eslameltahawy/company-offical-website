@@ -51,14 +51,6 @@ export default function Hero() {
 
       {/* ── MOBILE HERO ─────────────────────────────────────────── */}
       <div className="lg:hidden relative z-10 px-4 pt-8 pb-6">
-        <motion.div {...fadeUp(0)} className="mb-5">
-          <img src="/smaw.png" alt="SMAW" className="h-10 w-auto mb-4" />
-          <span className="badge inline-flex gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
-            Saudi Product House
-          </span>
-        </motion.div>
-
         <h1
           className="text-[2.35rem] font-bold leading-[1.25] tracking-tight mb-4"
           style={{ fontFamily: 'Cairo' }}
