@@ -39,7 +39,7 @@ export default function Footer() {
               <img src="/smaw.png" alt="SMAW" style={{ height: 28, width: 'auto' }} />
             </div>
             <p className="text-sm text-[#7a93bc] leading-relaxed max-w-[240px]" style={{ fontFamily: 'Cairo' }}>
-              بيت منتجات برمجية سعودي — متخصصون في بناء أنظمة إدارة المؤسسات للشركات السعودية.
+              بيت منتجات برمجية سعودي، متخصصون في بناء أنظمة إدارة المؤسسات للشركات السعودية.
             </p>
             <div className="flex items-center gap-1 mt-4">
               <span className="text-xs text-[#3d5270] flex items-center gap-1.5" style={{ fontFamily: 'Cairo' }}>

@@ -39,18 +39,9 @@ export default function FinalCTA() {
             transition={{ duration: 0.5, ease: EASE }}
             className="mb-6"
           >
-            <div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold"
-              style={{
-                background: 'rgba(16,185,129,0.1)',
-                border: '1px solid rgba(16,185,129,0.25)',
-                color: '#2563eb',
-                fontFamily: 'Cairo',
-              }}
-            >
-              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
+            <p className="text-xs font-bold text-[#60a5fa] tracking-wide" style={{ fontFamily: 'Cairo' }}>
               شركات جديدة تنضم كل أسبوع
-            </div>
+            </p>
           </motion.div>
 
           {/* Headline */}
@@ -74,8 +65,7 @@ export default function FinalCTA() {
             className="text-[#7a93bc] text-sm lg:text-lg leading-relaxed mb-8 lg:mb-10 px-1"
             style={{ fontFamily: 'Cairo' }}
           >
-            انضم لأكثر من 50 شركة سعودية وخليجية تدير موارد بشريتها بذكاء وكفاءة مع SMAW —
-            بدون تعقيد ودون رسوم مخفية
+            انضم لأكثر من 50 شركة سعودية وخليجية تدير موارد بشريتها بذكاء وكفاءة مع SMAW، بدون تعقيد ودون رسوم مخفية
           </motion.p>
 
           {/* Social proof numbers */}

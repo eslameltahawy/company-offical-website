@@ -123,7 +123,9 @@ export default function BookingCTA() {
       transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       className="lg:sticky lg:top-28 mb-8 lg:mb-0"
     >
-      <span className="badge mb-4">BOOK A DEMO</span>
+      <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>
+        احجز موعداً
+      </p>
       <h2
         className="text-2xl lg:text-4xl font-bold tracking-tight mb-4 lg:mb-5"
         style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
@@ -262,7 +264,7 @@ export default function BookingCTA() {
                             >
                               {dateLabel(date)}
                             </p>
-                            <div className="flex lg:grid lg:grid-cols-2 gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 -mx-1 px-1 snap-x snap-mandatory">
+                            <div className="grid grid-cols-2 gap-2">
                               {times.map((slot) => {
                                 const isSelected = selectedSlot?.id === slot.id
                                 return (
@@ -270,7 +272,7 @@ export default function BookingCTA() {
                                     key={slot.id}
                                     disabled={slot.booked}
                                     onClick={() => setSelectedSlot(isSelected ? null : slot)}
-                                    className="relative rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 text-right flex-shrink-0 w-[42%] lg:w-auto snap-center"
+                                    className="relative rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 text-right"
                                     style={{
                                       fontFamily: 'Cairo',
                                       background: slot.booked

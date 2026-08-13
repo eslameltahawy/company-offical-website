@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 const fadeUp = (delay = 0) => ({
@@ -88,22 +87,19 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        <motion.div {...fadeUp(0.45)} className="-mx-4">
-          <MobileCarousel gap="10px">
-            {stats.map((s) => (
-              <MobileCarouselItem key={s.label} width="42vw" className="first:ms-4 last:me-4">
-                <div
-                  className="rounded-2xl px-4 py-4 text-center h-full"
-                  style={{ background: 'rgba(13,21,37,0.95)', border: '1px solid rgba(148,163,184,0.1)' }}
-                >
-                  <div className="text-xl font-bold gradient-text-blue mb-1" style={{ fontFamily: 'Cairo' }}>
-                    {s.value}
-                  </div>
-                  <div className="text-[11px] text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>{s.label}</div>
-                </div>
-              </MobileCarouselItem>
-            ))}
-          </MobileCarousel>
+        <motion.div {...fadeUp(0.45)} className="grid grid-cols-2 gap-3">
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="rounded-2xl px-3 py-4 text-center"
+              style={{ background: 'rgba(13,21,37,0.95)', border: '1px solid rgba(148,163,184,0.1)' }}
+            >
+              <div className="text-xl font-bold gradient-text-blue mb-1" style={{ fontFamily: 'Cairo' }}>
+                {s.value}
+              </div>
+              <div className="text-[11px] text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>{s.label}</div>
+            </div>
+          ))}
         </motion.div>
 
         <motion.p {...fadeUp(0.55)} className="mt-5 text-xs text-[#3d5270] text-center" style={{ fontFamily: 'Cairo' }}>
@@ -115,13 +111,6 @@ export default function Hero() {
       <div className="hidden lg:block container-smaw relative z-10 py-20 w-full">
         <div className="grid grid-cols-2 gap-16 items-center">
           <div>
-            <motion.div {...fadeUp(0)}>
-              <span className="badge mb-6 inline-flex gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2563eb] animate-pulse" />
-                Software Product House · Saudi-native
-              </span>
-            </motion.div>
-
             <h1
               className="text-[3rem] font-bold leading-[1.3] tracking-[-0.02em] mb-5"
               style={{ fontFamily: 'Cairo', overflow: 'hidden' }}
@@ -207,7 +196,7 @@ export default function Hero() {
                   className="flex-1 mx-4 py-1 px-3 rounded text-[10px] text-[#3d5270] border border-[rgba(148,163,184,0.06)] text-center"
                   style={{ fontFamily: 'Cairo', background: 'rgba(0,0,0,0.3)' }}
                 >
-                  smaww.com · منتجاتنا
+                  smaww.com
                 </div>
                 <div
                   className="flex items-center gap-1 text-[10px] text-[#60a5fa] px-2 py-0.5 rounded bg-[#2563eb]/10 border border-[#2563eb]/20"

@@ -1,14 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const testimonials = [
   {
     quote: 'قبل SMAW HR كنا نُعدّ الرواتب يدوياً في Excel. الآن العملية كلها تتم تلقائياً ونراجعها فقط.',
     author: 'أحمد القحطاني',
     role: 'مدير الموارد البشرية',
-    company: 'شركة مقاولات — الرياض',
+    company: 'شركة مقاولات، الرياض',
     initial: 'أ',
     color: '#2563eb',
   },
@@ -16,7 +15,7 @@ const testimonials = [
     quote: 'الدعم الفني سريع الاستجابة ويفهم متطلبات الشركات السعودية. لم نحتج لشرح السياق مطوّلاً.',
     author: 'منى الزهراني',
     role: 'المديرة التنفيذية',
-    company: 'شركة خدمات لوجستية — جدة',
+    company: 'شركة خدمات لوجستية، جدة',
     initial: 'م',
     color: '#2563eb',
   },
@@ -24,7 +23,7 @@ const testimonials = [
     quote: 'عملية إعداد نظام حماية الأجور كانت مقلقة، لكن الفريق أرشدنا خطوة بخطوة حتى الاعتماد.',
     author: 'فيصل العمري',
     role: 'CFO',
-    company: 'شركة تقنية ناشئة — الدمام',
+    company: 'شركة تقنية ناشئة، الدمام',
     initial: 'ف',
     color: '#2563eb',
   },
@@ -32,7 +31,7 @@ const testimonials = [
     quote: 'وفّر علينا النظام ساعات طويلة كل شهر في إعداد الشؤون الإدارية. بسيط وعملي.',
     author: 'هند السهلي',
     role: 'مسؤولة الموارد البشرية',
-    company: 'شركة تجزئة — الرياض',
+    company: 'شركة تجزئة، الرياض',
     initial: 'هـ',
     color: '#2563eb',
   },
@@ -40,7 +39,7 @@ const testimonials = [
     quote: 'أعجبني أن النظام يفهم اللوائح المحلية. لم أكن أتوقع هذا المستوى من التوافق مع نظام العمل السعودي.',
     author: 'خالد المطيري',
     role: 'مدير العمليات',
-    company: 'شركة توزيع غذائي — القصيم',
+    company: 'شركة توزيع غذائي، القصيم',
     initial: 'خ',
     color: '#2563eb',
   },
@@ -48,7 +47,7 @@ const testimonials = [
     quote: 'الواجهة واضحة ولا تحتاج لتدريب مطوّل. الموظفون تكيّفوا معها بسرعة.',
     author: 'نورة العتيبي',
     role: 'مديرة الإدارة',
-    company: 'مكتب استشارات — الرياض',
+    company: 'مكتب استشارات، الرياض',
     initial: 'ن',
     color: '#2563eb',
   },
@@ -56,7 +55,7 @@ const testimonials = [
     quote: 'كنا نبحث عن نظام يناسب حجمنا كشركة متوسطة دون تكاليف ضخمة. وجدنا ما نحتاجه.',
     author: 'عبدالله الدوسري',
     role: 'صاحب المنشأة',
-    company: 'مصنع صغير — المدينة المنورة',
+    company: 'مصنع صغير، المدينة المنورة',
     initial: 'ع',
     color: '#2563eb',
   },
@@ -64,7 +63,7 @@ const testimonials = [
     quote: 'التقارير الشهرية أصبحت تُنجز في دقائق. سهّل علينا التدقيق السنوي بشكل واضح.',
     author: 'سلطان الشريف',
     role: 'المحاسب الرئيسي',
-    company: 'شركة خدمات طبية — الرياض',
+    company: 'شركة خدمات طبية، الرياض',
     initial: 'س',
     color: '#2563eb',
   },
@@ -122,7 +121,9 @@ export default function Testimonials() {
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="text-center mb-8 lg:mb-14"
         >
-          <span className="badge mb-4">CLIENT STORIES</span>
+          <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>
+            آراء العملاء
+          </p>
           <h2 className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4" style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}>
             ماذا يقول{' '}
             <span className="gradient-text">عملاؤنا</span>
@@ -132,26 +133,14 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Mobile carousel */}
-        <div className="lg:hidden -mx-4">
-          <MobileCarousel>
-            {testimonials.map((t) => (
-              <MobileCarouselItem key={t.author} width="88vw" className="first:ms-4 last:me-4">
-                <TestimonialCard t={t} />
-              </MobileCarouselItem>
-            ))}
-          </MobileCarousel>
-        </div>
-
-        {/* Desktop grid */}
-        <div className="hidden lg:grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.author}
-              initial={{ opacity: 0, y: 24, scale: 0.95 }}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.05 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay: i * 0.04 }}
             >
               <TestimonialCard t={t} />
             </motion.div>

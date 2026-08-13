@@ -184,7 +184,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                   <div className="flex items-center gap-2 mb-3">
                     <i className="fab fa-chrome text-[#60a5fa] text-sm" />
                     <span className="text-xs font-bold text-[#60a5fa]" style={{ fontFamily: 'Cairo' }}>
-                      خطوات التثبيت على Chrome — سهلة ومجانية 100%
+                      خطوات التثبيت على Chrome، سهلة ومجانية 100%
                     </span>
                   </div>
                   <ol className="space-y-2.5">
@@ -297,7 +297,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     }}
                   >
                     <i className="fas fa-clock text-xs" />
-                    <span>قيد التطوير — سيُطلق قريباً</span>
+                    <span>قيد التطوير، سيُطلق قريباً</span>
                   </div>
                   <a
                     href="#booking"

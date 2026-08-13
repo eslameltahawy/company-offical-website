@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { products, type Product } from '@/data/products'
 import ProductModal from '@/components/ProductModal'
-import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -15,39 +14,36 @@ function ProductCard({
   product,
   index,
   onClick,
-  mobile,
 }: {
   product: Product
   index: number
   onClick: () => void
-  mobile?: boolean
 }) {
   const isLive = product.status === 'live'
 
   return (
     <motion.button
-      initial={mobile ? false : { opacity: 0, y: 28 }}
-      whileInView={mobile ? undefined : { opacity: 1, y: 0 }}
-      viewport={mobile ? undefined : { once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.55, delay: index * 0.06, ease: EASE }}
       onClick={onClick}
-      className={`group relative w-full text-right rounded-2xl p-5 transition-all duration-300 ${mobile ? 'h-full' : 'hover:-translate-y-1'}`}
+      className="group relative w-full text-right rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
       style={{
         background: isLive ? 'rgba(13,21,37,0.95)' : 'rgba(10,16,32,0.85)',
         border: isLive
           ? '1px solid rgba(148,163,184,0.12)'
           : '1px solid rgba(148,163,184,0.07)',
         opacity: isLive ? 1 : 0.85,
-        boxShadow: mobile ? '0 12px 40px rgba(0,0,0,0.35)' : undefined,
       }}
     >
       <div className="flex items-center justify-between gap-3 mb-3">
         <div className="flex items-center gap-2.5 min-w-0">
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
             style={{ background: `${product.color}18`, color: product.color }}
           >
-            <i className={`${product.icon} text-sm`} />
+            <i className={`${product.icon} text-base`} />
           </div>
           <h3 className="text-sm font-bold text-[#e2e8f8] truncate" style={{ fontFamily: 'Cairo' }}>
             {product.name}
@@ -62,7 +58,7 @@ function ProductCard({
             border: `1px solid ${isLive ? 'rgba(37,99,235,0.28)' : 'rgba(148,163,184,0.14)'}`,
           }}
         >
-          {isLive ? '● Live' : '⚙ قريباً'}
+          {isLive ? 'متاح' : 'قريباً'}
         </span>
       </div>
 
@@ -103,12 +99,14 @@ export default function ProductsSection() {
           transition={{ duration: 0.65, ease: EASE }}
           className="text-center mb-8 lg:mb-16"
         >
-          <span className="badge mb-4">منتجاتنا</span>
+          <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>
+            منتجاتنا
+          </p>
           <h2
             className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
           >
-            ثمانية منتجات رقمية،{' '}
+            ثمانية منتجات رقمية{' '}
             <span className="gradient-text">بهوية واحدة</span>
           </h2>
           <p className="text-[#7a93bc] max-w-[540px] mx-auto text-sm lg:text-base leading-relaxed" style={{ fontFamily: 'Cairo' }}>
@@ -116,69 +114,33 @@ export default function ProductsSection() {
           </p>
         </motion.div>
 
-        <div className="lg:hidden space-y-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4 px-1">
-              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
-              <span className="text-xs font-bold text-[#60a5fa]" style={{ fontFamily: 'Cairo' }}>متاح الآن</span>
-            </div>
-            <div className="-mx-4">
-              <MobileCarousel>
-                {liveProducts.map((p, i) => (
-                  <MobileCarouselItem key={p.id} width="82vw" className="first:ms-4 last:me-4">
-                    <ProductCard product={p} index={i} mobile onClick={() => setSelected(p)} />
-                  </MobileCarouselItem>
-                ))}
-              </MobileCarousel>
-            </div>
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
+            <span className="text-xs font-bold text-[#60a5fa]" style={{ fontFamily: 'Cairo' }}>
+              متاح الآن، 4 منتجات
+            </span>
+            <div className="flex-1 h-px bg-[rgba(37,99,235,0.15)]" />
           </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-4 px-1">
-              <span className="w-2 h-2 rounded-full bg-[#3d5270]" />
-              <span className="text-xs font-bold text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>قيد التطوير</span>
-            </div>
-            <div className="-mx-4">
-              <MobileCarousel>
-                {devProducts.map((p, i) => (
-                  <MobileCarouselItem key={p.id} width="82vw" className="first:ms-4 last:me-4">
-                    <ProductCard product={p} index={i} mobile onClick={() => setSelected(p)} />
-                  </MobileCarouselItem>
-                ))}
-              </MobileCarousel>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {liveProducts.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} onClick={() => setSelected(p)} />
+            ))}
           </div>
         </div>
 
-        <div className="hidden lg:block">
-          <div className="mb-10">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-pulse" />
-              <span className="text-xs font-bold text-[#60a5fa] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
-                متاح الآن — 4 منتجات
-              </span>
-              <div className="flex-1 h-px bg-[rgba(16,185,129,0.15)]" />
-            </div>
-            <div className="grid grid-cols-4 gap-4">
-              {liveProducts.map((p, i) => (
-                <ProductCard key={p.id} product={p} index={i} onClick={() => setSelected(p)} />
-              ))}
-            </div>
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-2 h-2 rounded-full bg-[#3d5270]" />
+            <span className="text-xs font-bold text-[#7a93bc]" style={{ fontFamily: 'Cairo' }}>
+              قيد التطوير، 4 منتجات
+            </span>
+            <div className="flex-1 h-px bg-[rgba(148,163,184,0.12)]" />
           </div>
-
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#3d5270]" />
-              <span className="text-xs font-bold text-[#7a93bc] uppercase tracking-widest" style={{ fontFamily: 'Cairo' }}>
-                قيد التطوير — 4 منتجات
-              </span>
-              <div className="flex-1 h-px bg-[rgba(245,158,11,0.15)]" />
-            </div>
-            <div className="grid grid-cols-4 gap-4">
-              {devProducts.map((p, i) => (
-                <ProductCard key={p.id} product={p} index={i + 4} onClick={() => setSelected(p)} />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {devProducts.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i + 4} onClick={() => setSelected(p)} />
+            ))}
           </div>
         </div>
 

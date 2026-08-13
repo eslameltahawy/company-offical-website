@@ -8,7 +8,7 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 const faqs = [
   {
     q: 'ما الفرق بين سماو وشركات البرمجيات الأخرى؟',
-    a: 'سماو ليست شركة تطوير مشاريع بالطلب — نحن بيت منتجات برمجية نبني حلولاً جاهزة مُصمَّمة أصلاً للسوق السعودي. كل منتج لدينا مبني بعد تحليل عميق لمشاكل الشركات السعودية، متوافق مع اللوائح المحلية من اليوم الأول، ولا يحتاج تخصيصاً مكلفاً.',
+    a: 'سماو ليست شركة تطوير مشاريع بالطلب. نحن بيت منتجات برمجية نبني حلولاً جاهزة مُصمَّمة أصلاً للسوق السعودي. كل منتج لدينا مبني بعد تحليل عميق لمشاكل الشركات السعودية، متوافق مع اللوائح المحلية من اليوم الأول، ولا يحتاج تخصيصاً مكلفاً.',
   },
   {
     q: 'هل منتجاتكم متوافقة مع اللوائح السعودية؟',
@@ -16,11 +16,11 @@ const faqs = [
   },
   {
     q: 'هل يمكن استخدام أكثر من منتج في آنٍ واحد؟',
-    a: 'بالتأكيد — وهذا هو القوة الحقيقية لسماو. منتجاتنا مصممة للعمل معاً؛ الموظف الذي يُضاف في HR يظهر تلقائياً في Archive وTask. يمكنك البدء بمنتج واحد وإضافة باقي المنتجات تدريجياً حسب احتياجك.',
+    a: 'بالتأكيد، وهذا هو القوة الحقيقية لسماو. منتجاتنا مصممة للعمل معاً؛ الموظف الذي يُضاف في HR يظهر تلقائياً في Archive وTask. يمكنك البدء بمنتج واحد وإضافة باقي المنتجات تدريجياً حسب احتياجك.',
   },
   {
     q: 'كم يستغرق تطبيق منتجاتكم؟',
-    a: 'معظم منتجاتنا تُطبَّق في 48 ساعة إلى أسبوع حسب حجم الشركة. فريق الإعداد يتولى رفع البيانات الحالية وضبط الإعدادات وتدريب الفريق — كل ذلك مدرج في الاشتراك.',
+    a: 'معظم منتجاتنا تُطبَّق في 48 ساعة إلى أسبوع حسب حجم الشركة. فريق الإعداد يتولى رفع البيانات الحالية وضبط الإعدادات وتدريب الفريق، وكل ذلك مدرج في الاشتراك.',
   },
   {
     q: 'هل بيانات شركتنا محفوظة وآمنة؟',
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'ما الفرق بين المنتجات المكتملة وتحت التطوير؟',
-    a: 'المنتجات المكتملة (HR، Connect، Theme، Lipr) متاحة للاشتراك الفوري. المنتجات تحت التطوير (Meet، Finance، Task، Archive) في مراحل بناء نهائية — يمكنك التسجيل مسبقاً للحصول على وصول تجريبي مبكر وسعر إطلاق مخفّض.',
+    a: 'المنتجات المكتملة (HR، Connect، Theme، Lipr) متاحة للاشتراك الفوري. المنتجات تحت التطوير (Meet، Finance، Task، Archive) في مراحل بناء نهائية، ويمكنك التسجيل مسبقاً للحصول على وصول تجريبي مبكر وسعر إطلاق مخفّض.',
   },
   {
     q: 'هل تقدمون عروضاً توضيحية قبل الاشتراك؟',
@@ -59,7 +59,9 @@ export default function FAQ() {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.65, ease: EASE }}
             >
-              <span className="badge mb-4">FAQ</span>
+              <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>
+                الأسئلة الشائعة
+              </p>
               <h2
                 className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
                 style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
@@ -82,7 +84,7 @@ export default function FAQ() {
                 <img src="/img/faq.png" alt="FAQ" className="w-full h-full object-cover" />
               </div>
 
-              <div className="flex lg:flex-col gap-3 mt-0 lg:mt-6 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 -mx-1 px-1">
+              <div className="flex flex-col gap-3 mt-0 lg:mt-6">
                 {[
                   { icon: 'fab fa-whatsapp', text: 'تواصل عبر واتساب', color: '#2563eb' },
                   { icon: 'fas fa-calendar-check', text: 'احجز موعداً الآن', color: '#2563eb' },
@@ -90,7 +92,7 @@ export default function FAQ() {
                   <a
                     key={item.text}
                     href="#booking"
-                    className="flex items-center gap-2.5 text-sm font-semibold transition-colors hover:opacity-80 flex-shrink-0 px-3 py-2.5 rounded-xl lg:px-0 lg:py-0 lg:rounded-none lg:bg-transparent lg:border-0"
+                    className="flex items-center gap-2.5 text-sm font-semibold transition-colors hover:opacity-80 px-3 py-2.5 rounded-xl lg:px-0 lg:py-0 lg:rounded-none lg:bg-transparent lg:border-0"
                     style={{
                       fontFamily: 'Cairo',
                       color: item.color,

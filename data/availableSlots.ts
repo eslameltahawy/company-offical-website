@@ -46,7 +46,7 @@ export function formatSlotLabel(slot: Slot): string {
   const period = h < 12 ? 'ص' : 'م'
   const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
   const timeStr = `${h12}:${m.toString().padStart(2, '0')} ${period}`
-  return `${dayName} ${dayNum} ${month} — ${timeStr}`
+  return `${dayName} ${dayNum} ${month}، ${timeStr}`
 }
 
 /** Build ISO start/end strings (UTC) for Google Calendar */

@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import MobileCarousel, { MobileCarouselItem } from '@/components/mobile/MobileCarousel'
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -10,37 +9,43 @@ const pillars = [
     icon: 'fas fa-flag',
     color: '#2563eb',
     title: 'هوية سعودية خضراء',
-    desc: 'منتجاتنا خاصة للسوق السعودي — متوافقة مع WPS وGOSI وZATCA ورؤية 2030. منظومة متكاملة سلسة وبدون تعقيدات أو اشتراطات.',
+    short: 'مصممة للسوق السعودي ومتوافقة مع الأنظمة المحلية.',
+    desc: 'منتجاتنا خاصة للسوق السعودي ومتوافقة مع WPS وGOSI وZATCA ورؤية 2030. منظومة متكاملة سلسة وبدون تعقيدات أو اشتراطات.',
   },
   {
     icon: 'fas fa-cubes',
     color: '#2563eb',
     title: 'منظومة متكاملة سلسة وبدون تعقيدات',
-    desc: 'ثمانية منتجات تعمل كشبكة رقمية عالية المستوى وتتبادل البيانات في الوقت الفعلي — موظف في HR يظهر تلقائياً في Payroll وTask وArchive.',
+    short: 'ثمانية منتجات تتبادل البيانات في الوقت الفعلي.',
+    desc: 'ثمانية منتجات تعمل كشبكة رقمية عالية المستوى وتتبادل البيانات في الوقت الفعلي. موظف في HR يظهر تلقائياً في Payroll وTask وArchive.',
   },
   {
     icon: 'fas fa-robot',
     color: '#2563eb',
     title: 'ذكاء اصطناعي في كل منتج',
-    desc: 'محسّن الأوامر في Lipr، محاضر الاجتماعات في Meet، وبحث ذكي في Archive — الـ AI ليس إضافة، هو جزء أساسي من كل منتج.',
+    short: 'الـ AI جزء أساسي من كل منتج وليس إضافة.',
+    desc: 'محسّن الأوامر في Lipr، محاضر الاجتماعات في Meet، وبحث ذكي في Archive. الـ AI ليس إضافة، هو جزء أساسي من كل منتج.',
   },
   {
     icon: 'fas fa-shield-alt',
     color: '#2563eb',
     title: 'أمان مؤسسي لا مساومة فيه',
+    short: 'تشفير كامل وبيانات داخل المملكة.',
     desc: 'تشفير JWT كامل، بيانات مُضافة داخل المملكة، صلاحيات دقيقة لكل مستخدم، ونسخ احتياطي تلقائي. بياناتك ملكك وحدك.',
   },
   {
     icon: 'fas fa-headset',
     color: '#2563eb',
     title: 'دعم فني باللغة العربية',
-    desc: 'فريق دعم سعودي يفهم بيئة عملك — بدون تعقيدات. نصل إليك بالعربية في نفس يوم العمل.',
+    short: 'فريق سعودي يصل إليك في نفس يوم العمل.',
+    desc: 'فريق دعم سعودي يفهم بيئة عملك بدون تعقيدات. نصل إليك بالعربية في نفس يوم العمل.',
   },
   {
     icon: 'fas fa-chart-line',
     color: '#2563eb',
     title: 'نمو احترافي لمؤسستك',
-    desc: '8 تطبيقات تخدم الشركات — الشركة الناشئة والكبيرة. منتجاتنا تكبر معك دون إعادة بناء أو تغيير نظام.',
+    short: 'تكبر معك من الشركة الناشئة إلى الكبيرة.',
+    desc: '8 تطبيقات تخدم الشركات، الناشئة والكبيرة. منتجاتنا تكبر معك دون إعادة بناء أو تغيير نظام.',
   },
 ]
 
@@ -51,15 +56,18 @@ function PillarCard({ p }: { p: (typeof pillars)[number] }) {
       style={{ background: 'rgba(13,21,37,0.9)', border: '1px solid rgba(148,163,184,0.09)' }}
     >
       <div
-        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
         style={{ background: `${p.color}15`, color: p.color }}
       >
-        <i className={`${p.icon} text-base`} />
+        <i className={`${p.icon} text-lg`} />
       </div>
       <h3 className="text-base font-bold text-[#e2e8f8] mb-2" style={{ fontFamily: 'Cairo' }}>
         {p.title}
       </h3>
-      <p className="text-sm text-[#7a93bc] leading-relaxed" style={{ fontFamily: 'Cairo' }}>
+      <p className="text-sm text-[#94a3b8] leading-relaxed mb-2 lg:hidden" style={{ fontFamily: 'Cairo' }}>
+        {p.short}
+      </p>
+      <p className="hidden lg:block text-sm text-[#7a93bc] leading-relaxed" style={{ fontFamily: 'Cairo' }}>
         {p.desc}
       </p>
     </div>
@@ -77,7 +85,9 @@ export default function WhySMAW() {
           transition={{ duration: 0.65, ease: EASE }}
           className="text-center mb-8 lg:mb-16"
         >
-          <span className="badge mb-4">لماذا سماو</span>
+          <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>
+            لماذا سماو
+          </p>
           <h2
             className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
@@ -90,26 +100,14 @@ export default function WhySMAW() {
           </p>
         </motion.div>
 
-        {/* Mobile snap carousel */}
-        <div className="lg:hidden -mx-4 mb-8">
-          <MobileCarousel>
-            {pillars.map((p) => (
-              <MobileCarouselItem key={p.title} width="78vw" className="first:ms-4 last:me-4">
-                <PillarCard p={p} />
-              </MobileCarouselItem>
-            ))}
-          </MobileCarousel>
-        </div>
-
-        {/* Desktop grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {pillars.map((p, i) => (
             <motion.div
               key={p.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+              transition={{ duration: 0.55, delay: i * 0.06, ease: EASE }}
             >
               <PillarCard p={p} />
             </motion.div>

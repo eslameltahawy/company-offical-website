@@ -16,7 +16,7 @@ const values5S = [
   { letter: 'Sp', title: 'Speed', arabic: 'السرعة', desc: 'نُنجز في ساعات ما يأخذ الآخرون أياماً', color: '#2563eb' },
   { letter: 'Sk', title: 'Spark', arabic: 'الإبداع', desc: 'نفكر خارج الصندوق في كل مشروع', color: '#2563eb' },
   { letter: 'Sc', title: 'Scale', arabic: 'التوسع', desc: 'نبني للنمو من اليوم الأول', color: '#2563eb' },
-  { letter: 'Su', title: 'Support', arabic: 'الدعم', desc: 'لسنا بائعي برمجيات — نحن شركاء نجاحك', color: '#2563eb' },
+  { letter: 'Su', title: 'Support', arabic: 'الدعم', desc: 'لسنا بائعي برمجيات، نحن شركاء نجاحك', color: '#2563eb' },
 ]
 
 const services = [
@@ -41,7 +41,7 @@ const aboutProducts = [
   {
     name: 'المنتجات المكتملة',
     tagline: 'جاهزة للاشتراك الآن',
-    desc: 'SMAW HR وSMAW Connect وSMAW Theme وSMAW Lipr — أربعة منتجات مكتملة تخدم أكثر من 50 شركة سعودية. كل منتج يحل مشكلة حقيقية بأداء عالي وامتثال للوائح المحلية.',
+    desc: 'SMAW HR وSMAW Connect وSMAW Theme وSMAW Lipr: أربعة منتجات مكتملة تخدم أكثر من 50 شركة سعودية. كل منتج يحل مشكلة حقيقية بأداء عالي وامتثال للوائح المحلية.',
     color: '#2563eb',
     icon: 'fas fa-check-circle',
     stat: '4 منتجات',
@@ -50,7 +50,7 @@ const aboutProducts = [
   {
     name: 'المنتجات قيد التطوير',
     tagline: 'إطلاق قريب',
-    desc: 'SMAW Meet وSMAW Finance وSMAW Task وSMAW Archive — أربعة منتجات في مراحل نهائية من التطوير. سجّل اهتمامك للحصول على وصول مبكر وأسعار إطلاق حصرية.',
+    desc: 'SMAW Meet وSMAW Finance وSMAW Task وSMAW Archive: أربعة منتجات في مراحل نهائية من التطوير. سجّل اهتمامك للحصول على وصول مبكر وأسعار إطلاق حصرية.',
     color: '#2563eb',
     icon: 'fas fa-rocket',
     stat: '4 منتجات',
@@ -74,20 +74,20 @@ export default function About() {
           transition={{ duration: 0.65, ease: EASE }}
           className="text-center mb-10 lg:mb-16"
         >
-          <span className="badge mb-4">ABOUT</span>
+          <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>من نحن</p>
           <h2
             className="text-2xl lg:text-4xl font-bold tracking-tight mb-3 lg:mb-4"
             style={{ fontFamily: 'Cairo', lineHeight: 1.2 }}
           >
-            من نحن —{' '}
+            من نحن{' '}
             <span className="gradient-text">بيت منتجات تقنية سعودي</span>
           </h2>
           <p
             className="text-[#7a93bc] max-w-[560px] mx-auto text-sm lg:text-base leading-relaxed"
             style={{ fontFamily: 'Cairo' }}
           >
-            SMAW Software شركة سعودية متخصصة في بناء منتجات وأنظمة برمجية عالية الأداء
-            — نؤمن أن التقنية يجب أن تُحل مشاكل حقيقية، لا أن تخلق تعقيداً إضافياً.
+            SMAW Software شركة سعودية متخصصة في بناء منتجات وأنظمة برمجية عالية الأداء.
+            نؤمن أن التقنية يجب أن تُحل مشاكل حقيقية، لا أن تخلق تعقيداً إضافياً.
           </p>
         </motion.div>
 
@@ -119,21 +119,21 @@ export default function About() {
               icon: 'fas fa-eye',
               title: 'رؤيتنا',
               titleEn: 'Vision',
-              body: 'بناء أنظمة رقمية ذكية وقابلة للتوسع تُشكّل مستقبل الشركات في المنطقة — عبر تقنيات هجينة تجمع بين الموثوقية والابتكار.',
+              body: 'بناء أنظمة رقمية ذكية وقابلة للتوسع تُشكّل مستقبل الشركات في المنطقة عبر تقنيات هجينة تجمع بين الموثوقية والابتكار.',
               color: '#2563eb',
             },
             {
               icon: 'fas fa-bullseye',
               title: 'مهمتنا',
               titleEn: 'Mission',
-              body: 'تسليم منتجات وأنظمة برمجية عالية الأداء تُشغّل شركات حقيقية وتصمد تحت أقصى ضغط — بدون تعقيد، وبدون مفاجآت.',
+              body: 'تسليم منتجات وأنظمة برمجية عالية الأداء تُشغّل شركات حقيقية وتصمد تحت أقصى ضغط، بدون تعقيد، وبدون مفاجآت.',
               color: '#2563eb',
             },
             {
               icon: 'fas fa-flag',
               title: 'هدفنا الاستراتيجي',
               titleEn: 'Goal',
-              body: 'قيادة السوق في مجال البنية التقنية الهجينة والأدوات المدعومة بالذكاء الاصطناعي — مع الحفاظ على هويتنا السعودية 100%.',
+              body: 'قيادة السوق في مجال البنية التقنية الهجينة والأدوات المدعومة بالذكاء الاصطناعي، مع الحفاظ على هويتنا السعودية 100%.',
               color: '#2563eb',
             },
           ].map((card, i) => (
@@ -171,9 +171,9 @@ export default function About() {
           className="mb-20"
         >
           <div className="text-center mb-10">
-            <span className="badge mb-3">CORE VALUES</span>
+            <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>قيمنا</p>
             <h3 className="text-2xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-              قيمنا الخمس — <span className="gradient-text">5S Framework</span>
+              قيمنا الخمس: <span className="gradient-text">5S Framework</span>
             </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -207,9 +207,9 @@ export default function About() {
         {/* ── Products ──────────────────────────── */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <span className="badge mb-3">PRODUCTS</span>
+            <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>منتجاتنا</p>
             <h3 className="text-2xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-              منتجاتنا — <span className="gradient-text">8 حلول لإدارة شركتك</span>
+              منتجاتنا: <span className="gradient-text">8 حلول لإدارة شركتك</span>
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -254,9 +254,9 @@ export default function About() {
         {/* ── Services ──────────────────────────── */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <span className="badge mb-3">SERVICES</span>
+            <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>خدماتنا</p>
             <h3 className="text-2xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-              خدماتنا — <span className="gradient-text">نُتقن ثمانية تخصصات</span>
+              خدماتنا: <span className="gradient-text">نُتقن ثمانية تخصصات</span>
             </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -289,12 +289,12 @@ export default function About() {
         {/* ── Methodology ───────────────────────── */}
         <div className="mb-16">
           <div className="text-center mb-10">
-            <span className="badge mb-3">METHODOLOGY</span>
+            <p className="text-xs font-bold text-[#60a5fa] mb-3 tracking-wide" style={{ fontFamily: 'Cairo' }}>منهجيتنا</p>
             <h3 className="text-2xl font-bold text-[#e2e8f8]" style={{ fontFamily: 'Cairo' }}>
-              منهجيتنا — <span className="gradient-text">Hybrid Waterfall + Agile</span>
+              منهجيتنا: <span className="gradient-text">Hybrid Waterfall + Agile</span>
             </h3>
             <p className="text-[#7a93bc] text-sm mt-3 max-w-md mx-auto" style={{ fontFamily: 'Cairo' }}>
-              نجمع بين الانضباط الهيكلي لـ Waterfall وسرعة الاستجابة في Agile — لنحقق التسليم في الوقت مع مرونة التكيف مع متطلباتك المتغيرة.
+              نجمع بين الانضباط الهيكلي لـ Waterfall وسرعة الاستجابة في Agile لنحقق التسليم في الوقت مع مرونة التكيف مع متطلباتك المتغيرة.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
